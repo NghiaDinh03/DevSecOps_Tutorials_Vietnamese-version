@@ -79,7 +79,35 @@ docker images | findstr devsecops-gemma-app
 
 ---
 
-### 📋 Bước 5: Khởi chạy Container với Cơ chế Gia cố An ninh tối đa
+### 📋 Bước 5: Quét lỗ hổng bảo mật của Image bằng Trivy cục bộ
+
+Trước khi triển khai Docker Image lên môi trường Production (hoặc thậm chí trước khi khởi chạy nó cục bộ), một kỹ sư DevSecOps bắt buộc phải thực hiện quét lỗ hổng bảo mật để phát hiện các thư viện bị lỗi thời hoặc các lỗi hệ điều hành (CVE - Common Vulnerabilities and Exposures). Công cụ quét mã nguồn mở chuẩn công nghiệp hiện nay là **Trivy** của Aqua Security.
+
+Bạn có thể chạy Trivy trực tiếp dưới dạng một container tạm thời (one-off container) để quét image `devsecops-gemma-app` mà không cần cài đặt Trivy lên máy cá nhân của mình.
+
+#### 1. Quét toàn bộ lỗi hệ điều hành và thư viện npm:
+Chạy lệnh sau để tải Trivy và quét image vừa build:
+```powershell
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image devsecops-gemma-app
+```
+*(Đối với Windows sử dụng Docker Desktop với WSL 2 backend, lệnh trên sẽ tự động giao tiếp với Docker Socket để lấy dữ liệu image).*
+
+#### 2. Phân tích kết quả quét (Scan Results):
+Trivy sẽ xuất ra bảng thống kê các lỗ hổng theo mức độ nghiêm trọng:
+*   **LOW** & **MEDIUM**: Các lỗi ít nguy hiểm, thường là do thư viện chưa được cập nhật bản vá tối ưu.
+*   **HIGH** & **CRITICAL**: Các lỗ hổng cực kỳ nguy hiểm (ví dụ: lỗi thực thi mã từ xa - RCE, tràn bộ đệm). Nếu gặp các lỗi này, pipeline CI/CD thường sẽ bị cấu hình chặn đứng (Fail-fast).
+
+#### 3. Bộ lọc chuyên sâu dành cho DevSecOps:
+Trong thực tế, chúng ta chỉ quan tâm và cần vá gấp các lỗ hổng mức độ cao (`HIGH,CRITICAL`). Hãy cấu hình Trivy chỉ hiển thị các lỗi này:
+```powershell
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL devsecops-gemma-app
+```
+
+Nhờ việc sử dụng Base Image tối giản `node:20-alpine`, số lượng lỗ hổng hệ thống của bạn sẽ cực kỳ ít (thậm chí là bằng 0), mang lại độ an toàn vượt trội so với việc sử dụng các base image đầy đủ như `node:latest` hoặc `ubuntu`.
+
+---
+
+### 📋 Bước 6: Khởi chạy Container với Cơ chế Gia cố An ninh tối đa
 Để kiểm nghiệm khả năng phòng thủ của container trước các cuộc tấn công khai thác ghi file hoặc leo thang đặc quyền, ta khởi chạy ứng dụng với các cờ an ninh cực kỳ khắt khe:
 
 ```powershell
@@ -102,7 +130,7 @@ docker run -d `
 
 ---
 
-### 📋 Bước 6: Kiểm tra và Xác minh Hệ thống (Verification)
+### 📋 Bước 7: Kiểm tra và Xác minh Hệ thống (Verification)
 
 #### 1. Kiểm tra ứng dụng hoạt động:
 Mở trình duyệt truy cập địa chỉ: `http://localhost:3000`. Hệ giao diện chat của ứng dụng Gemma Chatbot phải hiển thị và hoạt động bình thường.
@@ -123,7 +151,7 @@ docker exec -it gemma-chatbot-secure touch /app/hack.js
 
 ---
 
-### 📋 Bước 7: Dọn dẹp tài nguyên sau thực hành
+### 📋 Bước 8: Dọn dẹp tài nguyên sau thực hành
 Sau khi hoàn tất việc tự kiểm chứng, bạn hãy xóa bỏ container thực hành để hoàn trả tài nguyên sạch sẽ cho máy host local:
 ```powershell
 docker rm -f gemma-chatbot-secure
