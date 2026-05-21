@@ -34,17 +34,17 @@ graph TD
 
 Bạn sẽ được dẫn dắt qua 3 Sub-module lớn từ lý thuyết sâu đến các bài Lab thực hành local tự thao tác 100%:
 
-### 1. Sub-module 01: [linux-networking](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/linux-networking/linux-networking-guide.md) (Hệ điều hành & Mạng máy tính)
+### 1. Sub-module 01: [linux-networking](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/01-linux-networking/linux-networking-guide.md) (Hệ điều hành & Mạng máy tính)
 *   **Lý thuyết chuyên sâu**: Cấu trúc thư mục Linux, phân quyền nâng cao (Chown, Chmod, SUID/SGID), cơ chế phân giải tên miền (DNS Resolution), quá trình bắt tay 3 bước (TCP Three-way Handshake).
-*   🧪 **Thực hành Lab**: [Phân tích & Xử lý sự cố mạng nội bộ (Linux Networking Troubleshooting)](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/linux-networking/labs/lab-linux-troubleshooting/lab-instructions.md).
+*   🧪 **Thực hành Lab**: [Phân tích & Xử lý sự cố mạng nội bộ (Linux Networking Troubleshooting)](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/01-linux-networking/labs/lab-linux-troubleshooting/lab-instructions.md).
 
-### 2. Sub-module 02: [scripting-automation](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/scripting-automation/scripting-automation-guide.md) (Tự động hóa bằng Bash/Python)
+### 2. Sub-module 02: [scripting-automation](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/02-scripting-automation/scripting-automation-guide.md) (Tự động hóa bằng Bash/Python)
 *   **Lý thuyết chuyên sâu**: Cú pháp kịch bản Bash (Variables, Loops, Conditions), lập trình tự động hóa Python cơ bản, và cơ chế lập lịch tác vụ tự động (Cron Utility/Crontab).
-*   🧪 **Thực hành Lab**: [Viết script tự động sao lưu cấu hình & Lập lịch định kỳ an toàn](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/scripting-automation/labs/lab-auto-backup-script/lab-instructions.md).
+*   🧪 **Thực hành Lab**: [Viết script tự động sao lưu cấu hình & Lập lịch định kỳ an toàn](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/02-scripting-automation/labs/lab-auto-backup-script/lab-instructions.md).
 
-### 3. Sub-module 03: [git-workflow](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/git-workflow/git-workflow-guide.md) (Quản lý mã nguồn & Gitflow bảo mật)
+### 3. Sub-module 03: [git-workflow](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/03-git-workflow/git-workflow-guide.md) (Quản lý mã nguồn & Gitflow bảo mật)
 *   **Lý thuyết chuyên sâu**: Cơ chế lưu trữ nội bộ của Git (Git Internals - Blobs, Trees, Commits), xác thực an toàn bằng SSH Keys, chiến lược phân nhánh bảo mật (Gitflow branching strategy) và ký số Commit bằng GPG.
-*   🧪 **Thực hành Lab**: [Giả lập quy trình làm việc nhóm & Xử lý xung đột mã nguồn (Git Collaboration & Conflict Resolution)](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/git-workflow/labs/lab-git-collaboration/lab-instructions.md).
+*   🧪 **Thực hành Lab**: [Giả lập quy trình làm việc nhóm & Xử lý xung đột mã nguồn (Git Collaboration & Conflict Resolution)](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/03-git-workflow/labs/lab-git-collaboration/lab-instructions.md).
 
 ---
 

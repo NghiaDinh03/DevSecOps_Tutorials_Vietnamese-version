@@ -84,9 +84,9 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**linux-networking**](01-fundamentals/linux-networking/linux-networking-guide.md) | Linux CLI, Filesystem, Permissions, Network (TCP/IP, DNS, SSH), Firewall | Linux Essentials, CCNA | ✅ |
-| [**scripting-automation**](01-fundamentals/scripting-automation/scripting-automation-guide.md) | Viết Bash script và Python automation phục vụ quản trị hệ thống | Automation Essentials | ✅ |
-| [**git-workflow**](01-fundamentals/git-workflow/git-workflow-guide.md) | Git Core, Branching Strategy (Gitflow), Git Hooks quét an toàn mã nguồn | Git Certification | ✅ |
+| [**linux-networking**](01-fundamentals/01-linux-networking/linux-networking-guide.md) | Linux CLI, Filesystem, Permissions, Network (TCP/IP, DNS, SSH), Firewall | Linux Essentials, CCNA | ✅ |
+| [**scripting-automation**](01-fundamentals/02-scripting-automation/scripting-automation-guide.md) | Viết Bash script và Python automation phục vụ quản trị hệ thống | Automation Essentials | ✅ |
+| [**git-workflow**](01-fundamentals/03-git-workflow/git-workflow-guide.md) | Git Core, Branching Strategy (Gitflow), Git Hooks quét an toàn mã nguồn | Git Certification | ✅ |
 
 ---
 
@@ -96,8 +96,8 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**docker-basics**](02-containerization/docker-basics/docker-basics-guide.md) | Dockerfile, Multi-stage Build, bảo mật Docker Image (chạy non-root) | Docker Certified Associate | ✅ |
-| [**docker-compose**](02-containerization/docker-compose/docker-compose-guide.md) | Xây dựng và phối hợp ứng dụng đa container (Multi-container Application) | DCA | ✅ |
+| [**docker-basics**](02-containerization/01-docker-basics/docker-basics-guide.md) | Dockerfile, Multi-stage Build, bảo mật Docker Image (chạy non-root) | Docker Certified Associate | ✅ |
+| [**docker-compose**](02-containerization/02-docker-compose/docker-compose-guide.md) | Xây dựng và phối hợp ứng dụng đa container (Multi-container Application) | DCA | ✅ |
 
 ---
 
@@ -107,8 +107,8 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**github-actions**](03-cicd-automation/github-actions/github-actions-guide.md) | Workflow Automation, Marketplace Actions, Self-hosted Runners | GitHub Actions Cert | ✅ |
-| [**jenkins-gitlab-ci**](03-cicd-automation/jenkins-gitlab-ci/jenkins-gitlab-ci-guide.md) | Quản lý Jenkins Server, GitLab Runner, tích hợp CI/CD nâng cao | Jenkins Engineer | ✅ |
+| [**github-actions**](03-cicd-automation/01-github-actions/github-actions-guide.md) | Workflow Automation, Marketplace Actions, Self-hosted Runners | GitHub Actions Cert | ✅ |
+| [**jenkins-gitlab-ci**](03-cicd-automation/02-jenkins-gitlab-ci/jenkins-gitlab-ci-guide.md) | Quản lý Jenkins Server, GitLab Runner, tích hợp CI/CD nâng cao | Jenkins Engineer | ✅ |
 
 ---
 
@@ -118,8 +118,8 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**terraform**](04-infrastructure-as-code/terraform/terraform-guide.md) | Khởi tạo tài nguyên đám mây (Provisioning), State Management | Terraform Associate | ✅ |
-| [**ansible**](04-infrastructure-as-code/ansible/ansible-guide.md) | Quản lý cấu hình server tự động (Configuration Management), Playbooks | Red Hat Ansible | ✅ |
+| [**terraform**](04-infrastructure-as-code/01-terraform/terraform-guide.md) | Khởi tạo tài nguyên đám mây (Provisioning), State Management | Terraform Associate | ✅ |
+| [**ansible**](04-infrastructure-as-code/02-ansible/ansible-guide.md) | Quản lý cấu hình server tự động (Configuration Management), Playbooks | Red Hat Ansible | ✅ |
 
 ---
 
@@ -143,8 +143,8 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**prometheus-grafana**](06-observability/prometheus-grafana/prometheus-grafana-guide.md) | Thu thập Metrics, tạo Dashboards trực quan, thiết lập Alerting | Grafana Certified | ✅ |
-| [**elk-loki-logging**](06-observability/elk-loki-logging/elk-loki-guide.md) | Thu thập và truy vấn Log tập trung sử dụng ELK Stack hoặc Grafana Loki | Elastic Certified | ✅ |
+| [**prometheus-grafana**](06-observability/01-prometheus-grafana/prometheus-grafana-guide.md) | Thu thập Metrics, tạo Dashboards trực quan, thiết lập Alerting | Grafana Certified | ✅ |
+| [**elk-loki-logging**](06-observability/02-elk-loki-logging/elk-loki-guide.md) | Thu thập và truy vấn Log tập trung sử dụng ELK Stack hoặc Grafana Loki | Elastic Certified | ✅ |
 
 ---
 
@@ -154,9 +154,9 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**security-scanning**](07-devsecops-pipeline/security-scanning/security-scanning-guide.md) | Tích hợp tự động SAST (SonarQube), SCA (Trivy) và DAST (OWASP ZAP) | DevSecOps Professional | ✅ |
-| [**secret-management**](07-devsecops-pipeline/secret-management/secret-management-guide.md) | Quản lý Secrets an toàn bằng HashiCorp Vault, Secrets Rotation | Vault Associate | ✅ |
-| [**compliance-as-code**](07-devsecops-pipeline/compliance-as-code/compliance-as-code-guide.md) | Tự động hóa kiểm tra tuân thủ chính sách bảo mật với Open Policy Agent (OPA) | Certified OPA | ✅ |
+| [**security-scanning**](07-devsecops-pipeline/01-security-scanning/security-scanning-guide.md) | Tích hợp tự động SAST (SonarQube), SCA (Trivy) và DAST (OWASP ZAP) | DevSecOps Professional | ✅ |
+| [**secret-management**](07-devsecops-pipeline/02-secret-management/secret-management-guide.md) | Quản lý Secrets an toàn bằng HashiCorp Vault, Secrets Rotation | Vault Associate | ✅ |
+| [**compliance-as-code**](07-devsecops-pipeline/03-compliance-as-code/compliance-as-code-guide.md) | Tự động hóa kiểm tra tuân thủ chính sách bảo mật với Open Policy Agent (OPA) | Certified OPA | ✅ |
 
 ---
 
@@ -166,9 +166,9 @@ Lộ trình được thiết kế một cách khoa học từ nền tảng (Begi
 
 | Sub-module | Nội dung chính | Chứng chỉ liên quan | Trạng thái |
 |------------|----------------|---------------------|:----------:|
-| [**incident-response**](08-security-operations/incident-response/incident-response-guide.md) | Phối hợp, ghi nhận và điều phối ứng phó sự cố an ninh bằng SOAR (TheHive) | SOC Specialist | ✅ |
-| [**threat-intelligence**](08-security-operations/threat-intelligence/threat-intelligence-guide.md) | Thu thập, phân tích mối đe dọa an ninh mạng bằng MISP | Threat Intel Cert | ✅ |
-| [**service-mesh-zero-trust**](08-security-operations/service-mesh-zero-trust/service-mesh-zero-trust-guide.md) | Quản lý microservices traffic, kích hoạt mTLS, mã hóa với Istio | Istio Expert | ✅ |
+| [**incident-response**](08-security-operations/01-incident-response/incident-response-guide.md) | Phối hợp, ghi nhận và điều phối ứng phó sự cố an ninh bằng SOAR (TheHive) | SOC Specialist | ✅ |
+| [**threat-intelligence**](08-security-operations/02-threat-intelligence/threat-intelligence-guide.md) | Thu thập, phân tích mối đe dọa an ninh mạng bằng MISP | Threat Intel Cert | ✅ |
+| [**service-mesh-zero-trust**](08-security-operations/03-service-mesh-zero-trust/service-mesh-zero-trust-guide.md) | Quản lý microservices traffic, kích hoạt mTLS, mã hóa với Istio | Istio Expert | ✅ |
 
 > 📝 = Đang xây dựng | ✅ = Hoàn thành | 🚧 = Đang viết
 
@@ -187,21 +187,21 @@ Dự án áp dụng triết lý học qua thực hành (**Hands-on Learning**). 
 ### 🗺 Bản đồ phân bổ Lab theo lộ trình:
 
 #### MODULE 1 — NỀN TẢNG DEVOPS
-*   **linux-networking**: [`lab-linux-troubleshooting`](01-fundamentals/linux-networking/labs/lab-linux-troubleshooting/lab-instructions.md) — Thực hành khắc phục sự cố DNS, phân quyền tệp tin và sửa cổng dịch vụ.
-*   **scripting-automation**: [`lab-auto-backup-script`](01-fundamentals/scripting-automation/labs/lab-auto-backup-script/lab-instructions.md) — Sao lưu cấu hình nén an toàn và lập lịch định kỳ tự động hóa bằng Cronjob.
-*   **git-workflow**: [`lab-git-collaboration`](01-fundamentals/git-workflow/labs/lab-git-collaboration/lab-instructions.md) — Giả lập Bare Repository cục bộ và xử lý xung đột mã nguồn khi làm việc nhóm.
+*   **linux-networking**: [`lab-linux-troubleshooting`](01-fundamentals/01-linux-networking/labs/lab-linux-troubleshooting/lab-instructions.md) — Thực hành khắc phục sự cố DNS, phân quyền tệp tin và sửa cổng dịch vụ.
+*   **scripting-automation**: [`lab-auto-backup-script`](01-fundamentals/02-scripting-automation/labs/lab-auto-backup-script/lab-instructions.md) — Sao lưu cấu hình nén an toàn và lập lịch định kỳ tự động hóa bằng Cronjob.
+*   **git-workflow**: [`lab-git-collaboration`](01-fundamentals/03-git-workflow/labs/lab-git-collaboration/lab-instructions.md) — Giả lập Bare Repository cục bộ và xử lý xung đột mã nguồn khi làm việc nhóm.
 
 #### MODULE 2 — CÔNG NGHỆ CONTAINER
-*   **docker-basics**: [`lab-dockerize-ai-app`](02-containerization/docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md) — Dockerize tối ưu và bảo mật ứng dụng AI Chatbot Gemma (`/VSC/gemma-chat`). *(Liên kết ngoài)*
-*   **docker-compose**: [`lab-compose-microservices`](02-containerization/docker-compose/labs/lab-compose-microservices/lab-instructions.md) — Dựng cụm Microservices 3 lớp gồm Frontend tĩnh, Backend API và Database PostgreSQL.
+*   **docker-basics**: [`lab-dockerize-ai-app`](02-containerization/01-docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md) — Dockerize tối ưu và bảo mật ứng dụng AI Chatbot Gemma (`/VSC/gemma-chat`). *(Liên kết ngoài)*
+*   **docker-compose**: [`lab-compose-microservices`](02-containerization/02-docker-compose/labs/lab-compose-microservices/lab-instructions.md) — Dựng cụm Microservices 3 lớp gồm Frontend tĩnh, Backend API và Database PostgreSQL.
 
 #### MODULE 3 — TỰ ĐỘNG HÓA CI/CD
-*   **github-actions**: [`lab-github-actions-runner`](03-cicd-automation/github-actions/labs/lab-github-actions-runner/lab-instructions.md) — Tự dựng Containerized Self-hosted Runner cục bộ chạy quét an toàn mã nguồn bằng Trivy (SCA).
-*   **jenkins-gitlab-ci**: [`lab-jenkins-sast`](03-cicd-automation/jenkins-gitlab-ci/labs/lab-jenkins-sast/lab-instructions.md) — Khởi dựng cụm phân tán Jenkins-SonarQube quét an toàn tĩnh mã nguồn (SAST) tự động chặn Quality Gate.
+*   **github-actions**: [`lab-github-actions-runner`](03-cicd-automation/01-github-actions/labs/lab-github-actions-runner/lab-instructions.md) — Tự dựng Containerized Self-hosted Runner cục bộ chạy quét an toàn mã nguồn bằng Trivy (SCA).
+*   **jenkins-gitlab-ci**: [`lab-jenkins-sast`](03-cicd-automation/02-jenkins-gitlab-ci/labs/lab-jenkins-sast/lab-instructions.md) — Khởi dựng cụm phân tán Jenkins-SonarQube quét an toàn tĩnh mã nguồn (SAST) tự động chặn Quality Gate.
 
 #### MODULE 4 — HẠ TẦNG DẠNG CODE (IaC)
-*   **terraform**: [`lab-terraform-local`](04-infrastructure-as-code/terraform/labs/lab-terraform-local/lab-instructions.md) — Khởi tạo các tài nguyên hệ thống cục bộ tương tác trực tiếp với Docker Socket.
-*   **ansible**: [`lab-ansible-hardening`](04-infrastructure-as-code/ansible/labs/lab-ansible-hardening/lab-instructions.md) — Playbook tự động gia cố bảo mật (hardening) hệ điều hành an toàn.
+*   **terraform**: [`lab-terraform-local`](04-infrastructure-as-code/01-terraform/labs/lab-terraform-local/lab-instructions.md) — Khởi tạo các tài nguyên hệ thống cục bộ tương tác trực tiếp với Docker Socket.
+*   **ansible**: [`lab-ansible-hardening`](04-infrastructure-as-code/02-ansible/labs/lab-ansible-hardening/lab-instructions.md) — Playbook tự động gia cố bảo mật (hardening) hệ điều hành an toàn.
 
 #### MODULE 5 — HỆ SINH THÁI KUBERNETES
 *   **01-k8s-basics**: [`lab-helm-deploy-webapp`](05-kubernetes/01-k8s-basics/labs/lab-helm-deploy-webapp/lab-instructions.md) — Đóng gói ứng dụng dạng Helm Chart và triển khai lên cụm Kubernetes cục bộ (k3d/kind).
@@ -209,18 +209,18 @@ Dự án áp dụng triết lý học qua thực hành (**Hands-on Learning**). 
 *   **03-k8s-security**: [`lab-hardening-ai-microservice`](05-kubernetes/03-k8s-security/labs/lab-hardening-ai-microservice/lab-instructions.md) — Thiết lập Network Policies, RBAC tối thiểu và Pod Security Context cho chatbot Gemma (`/VSC/gemma-chat`). *(Liên kết ngoài)*
 
 #### MODULE 6 — GIÁM SÁT & TRỰC QUAN HÓA
-*   **prometheus-grafana**: [`lab-prometheus-grafana`](06-observability/prometheus-grafana/labs/lab-prometheus-grafana/lab-instructions.md) — Giám sát hiệu năng hệ thống microservices và tự động gửi cảnh báo qua Alertmanager.
-*   **elk-loki-logging**: [`lab-elk-loki`](06-observability/elk-loki-logging/labs/lab-elk-loki/lab-instructions.md) — Thu thập, lọc và truy vấn log tập trung từ các containers bằng Grafana Loki & Promtail.
+*   **prometheus-grafana**: [`lab-prometheus-grafana`](06-observability/01-prometheus-grafana/labs/lab-prometheus-grafana/lab-instructions.md) — Giám sát hiệu năng hệ thống microservices và tự động gửi cảnh báo qua Alertmanager.
+*   **elk-loki-logging**: [`lab-elk-loki`](06-observability/02-elk-loki-logging/labs/lab-elk-loki/lab-instructions.md) — Thu thập, lọc và truy vấn log tập trung từ các containers bằng Grafana Loki & Promtail.
 
 #### MODULE 7 — TÍCH HỢP BẢO MẬT CI/CD (DEVSECOPS PIPELINE)
-*   **security-scanning**: [`lab-pipeline-security`](07-devsecops-pipeline/security-scanning/labs/lab-pipeline-security/lab-instructions.md) — Quét an toàn mã nguồn tĩnh (SAST), phân tích thành phần phụ thuộc (SCA) tự động chặn lỗ hổng nghiêm trọng ở pipeline.
-*   **secret-management**: [`lab-vault-secrets`](07-devsecops-pipeline/secret-management/labs/lab-vault-secrets/lab-instructions.md) — Lưu trữ và truy xuất dynamic credentials an toàn từ HashiCorp Vault.
-*   **compliance-as-code**: [`lab-opa-conftest`](07-devsecops-pipeline/compliance-as-code/labs/lab-opa-conftest/lab-instructions.md) — Kiểm tra và cưỡng chế tuân thủ chính sách bảo mật hạ tầng Docker/Kubernetes bằng Rego (Conftest).
+*   **security-scanning**: [`lab-pipeline-security`](07-devsecops-pipeline/01-security-scanning/labs/lab-pipeline-security/lab-instructions.md) — Quét an toàn mã nguồn tĩnh (SAST), phân tích thành phần phụ thuộc (SCA) tự động chặn lỗ hổng nghiêm trọng ở pipeline.
+*   **secret-management**: [`lab-vault-secrets`](07-devsecops-pipeline/02-secret-management/labs/lab-vault-secrets/lab-instructions.md) — Lưu trữ và truy xuất dynamic credentials an toàn từ HashiCorp Vault.
+*   **compliance-as-code**: [`lab-opa-conftest`](07-devsecops-pipeline/03-compliance-as-code/labs/lab-opa-conftest/lab-instructions.md) — Kiểm tra và cưỡng chế tuân thủ chính sách bảo mật hạ tầng Docker/Kubernetes bằng Rego (Conftest).
 
 #### MODULE 8 — VẬN HÀNH & AN NINH PHÒNG THỦ
-*   **incident-response**: [`lab-incident-response`](08-security-operations/incident-response/labs/lab-incident-response/lab-instructions.md) — Giám sát an ninh Runtime thời gian thực bằng Mini-Falco và cơ chế chia sẻ PID Namespace.
-*   **threat-intelligence**: [`lab-misp-intel`](08-security-operations/threat-intelligence/labs/lab-misp-intel/lab-instructions.md) — Triển khai cụm threat sharing MISP mock phục vụ quản lý chỉ số độc hại IOCs và tự động sinh Suricata API Blocklist.
-*   **service-mesh-zero-trust**: [`lab-istio-mtls`](08-security-operations/service-mesh-zero-trust/labs/lab-istio-mtls/lab-instructions.md) — Cấu hình Istio Service Mesh, kích hoạt mTLS bắt buộc để bảo vệ traffic nội bộ Zero-trust.
+*   **incident-response**: [`lab-incident-response`](08-security-operations/01-incident-response/labs/lab-incident-response/lab-instructions.md) — Giám sát an ninh Runtime thời gian thực bằng Mini-Falco và cơ chế chia sẻ PID Namespace.
+*   **threat-intelligence**: [`lab-misp-intel`](08-security-operations/02-threat-intelligence/labs/lab-misp-intel/lab-instructions.md) — Triển khai cụm threat sharing MISP mock phục vụ quản lý chỉ số độc hại IOCs và tự động sinh Suricata API Blocklist.
+*   **service-mesh-zero-trust**: [`lab-istio-mtls`](08-security-operations/03-service-mesh-zero-trust/labs/lab-istio-mtls/lab-instructions.md) — Cấu hình Istio Service Mesh, kích hoạt mTLS bắt buộc để bảo vệ traffic nội bộ Zero-trust.
 
 ---
 
