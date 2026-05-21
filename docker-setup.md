@@ -129,6 +129,9 @@ docker run hello-world
 ```
 Nếu màn hình Terminal xuất hiện dòng chữ **"Hello from Docker! This message shows that your installation appears to be working correctly."** thì xin chúc mừng, bạn đã cài đặt thành công hệ thống Docker!
 
+### 3. Thực hành ngay: Tự dựng Trợ lý học tập AI cục bộ (Ollama & WebUI)
+Để trải nghiệm ngay sức mạnh của Docker Compose sau khi cài đặt thành công, hãy di chuyển tới bài lab [Tự Dựng Trợ Lý AI Cục Bộ](./02-containerization/02-docker-compose/docker-compose-guide.md#5-lab-thực-chiến-tự-dựng-trợ-lý-học-tập-ai-cục-bộ-ollama--open-webui). Bạn sẽ được tự tay triển khai mô hình ngôn ngữ lớn (LLM) và giao diện Web trò chuyện chạy 100% offline trên chính máy tính của mình vô cùng dễ dàng!
+
 ---
 
 ## 5. Các lỗi thường gặp & Cách khắc phục (Troubleshooting)

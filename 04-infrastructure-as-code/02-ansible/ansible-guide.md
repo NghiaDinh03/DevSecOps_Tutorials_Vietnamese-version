@@ -80,10 +80,15 @@ Tự động hóa gia cố bảo mật (Security Hardening) là ứng dụng qua
 
 ## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-### 🇬🇧 [OS Hardening with Ansible: Implementing CIS Benchmarks Automatically (Gia Cố Bảo Mật Hệ Điều Hành Bằng Ansible: Tự Động Hóa Triển Khai Tiêu Chuẩn Bảo Mật CIS)](./blog/os-hardening-ansible.md)
-*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín từ Dev-Sec.io được lưu trữ cục bộ.
+### 🇻🇳 [Tự Động Gia Cố Bảo Mật Hệ Điều Hành Bằng Ansible Theo Chuẩn CIS Benchmarks (OS Hardening with Ansible)](./blog/os-hardening-ansible.md)
+*   **Chi tiết**: Bản dịch thuật & biên soạn chuyên sâu 100% tiếng Việt của bài blog uy tín từ Dev-Sec.io được lưu trữ cục bộ.
 *   **Giá trị thực tiễn**: Khám phá quy trình tự động hóa OS Hardening 4 tầng (SSH, Kernel sysctl, file permissions, firewall) sử dụng Ansible để nâng cao an ninh hạ tầng chuẩn CIS Benchmarks.
 *   **Liên kết nguồn gốc**: [Dev-Sec.io - OS Hardening with Ansible](https://dev-sec.io/)
+
+### 🇻🇳 [Bảo Mật Thông Tin Nhạy Cảm Trong Playbook Với Ansible Vault (Securing Secrets with Ansible Vault)](./blog/securing-secrets-ansible-vault.md)
+*   **Chi tiết**: Hướng dẫn dịch thuật chuyên sâu từ tài liệu chính thức của Ansible và kinh nghiệm thực tế về quản lý dữ liệu nhạy cảm.
+*   **Giá trị thực tiễn**: Hướng dẫn chi tiết cách mã hóa AES-256 các biến cấu hình, quản lý mật khẩu an toàn thông qua tập tin khóa (vault password file), và cơ chế tích hợp tự động giải mã trong các hệ thống CI/CD Jenkins/GitLab CI.
+*   **Liên kết nguồn gốc**: [Ansible Documentation - Encrypting Content with Ansible Vault](https://docs.ansible.com/ansible/latest/vault/index.html)
 
 ---
 

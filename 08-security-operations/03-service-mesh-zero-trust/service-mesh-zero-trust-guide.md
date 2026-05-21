@@ -101,6 +101,11 @@ Istio cung cấp các tài nguyên YAML (Kubernetes Custom Resources) để cấ
 *   **Giá trị thực tiễn**: Hiểu rõ sự khác biệt giữa TLS một chiều và mTLS, cơ chế định danh SPIFFE ID, quy trình cấp phát và xoay vòng chứng chỉ qua Istiod (CA) & SDS, và cách iptables đánh chặn lưu lượng mạng.
 *   **Liên kết nguồn gốc**: [Istio Blog - Mutual TLS Deep Dive](https://istio.io/latest/docs/concepts/security/)
 
+### 🛡️ [Hiện Thực Hóa Mô Hình Bảo Mật Zero-Trust Trong Kubernetes Bằng Istio Service Mesh](./blog/zero-trust-kubernetes-istio-mesh.md)
+*   **Chi tiết**: Hướng dẫn thực tiễn từng bước thiết lập mô hình Zero-Trust cho hệ thống microservices nội bộ bằng Istio Service Mesh trong Kubernetes.
+*   **Giá trị thực tiễn**: Hiểu rõ thách thức bảo mật East-West traffic, cách thức kích hoạt mTLS STRICT bắt buộc mã hóa kết nối mạng nội bộ, tạo Service Account để phân tách danh tính, và cấu hình Authorization Policy để cưỡng chế chính sách quyền truy cập tối giản.
+*   **Liên kết nguồn gốc**: [Istio.io - Security in Service Mesh](https://istio.io/latest/docs/concepts/security/)
+
 ---
 
 ## 🚀 Bước tiếp theo

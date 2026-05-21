@@ -72,14 +72,38 @@ Nếu Prometheus xuất sắc trong việc **thu thập và lưu trữ**, thì *
 *   **Dashboards & Panels**: Cho phép kéo thả và thiết lập các đồ thị trực quan cực kỳ sinh động (Graph, Gauge, Bar Chart, Heatmap).
 *   **Alerting**: Cho phép thiết lập các ngưỡng cảnh báo trực tiếp trên giao diện đồ thị (ví dụ: vẽ một đường line đỏ ở mức CPU 80%, nếu đồ thị vượt ngưỡng này quá 3 phút, Grafana sẽ tự động bắn tin nhắn cảnh báo về Slack/Telegram).
 
+## 5. 🧪 Tích hợp Chaos Engineering: Kiểm Thử Hệ Thống Cảnh Báo (Chaos Alert Testing)
+
+Trong thực tế vận hành hệ thống, việc có một hệ thống giám sát và cảnh báo là chưa đủ. Một câu hỏi lớn mà các kỹ sư SRE luôn phải đặt ra là: **"Liệu hệ thống cảnh báo có thực sự hoạt động khi sự cố xảy ra hay không?"**
+
+Để trả lời câu hỏi này, chúng ta áp dụng triết lý của **Chaos Engineering (Kỹ nghệ hỗn loạn)**: chủ động tạo ra sự cố giả lập trong môi trường được kiểm soát để xác minh tính đúng đắn của hệ thống giám sát.
+
+### A. Quy trình 3 bước Kiểm thử Hỗn loạn cho Cảnh báo (Alert Testing)
+1. **Thiết lập Giả định (Hypothesis)**: Thiết lập giả định rằng nếu mức sử dụng CPU của container ứng dụng vượt quá 90% liên tục trong 1 phút, Prometheus sẽ phát hiện, chuyển trạng thái Alert sang `FIRING` và Alertmanager sẽ gửi cảnh báo đến Slack/Telegram trong vòng tối đa 90 giây.
+2. **Kích hoạt Chaos Tool (Tạo tải giả lập)**: Sử dụng các công cụ tạo tải hoặc kiểm thử lỗi. Ở mức độ đơn giản trong Docker, chúng ta có thể dùng công cụ `stress-ng` trực tiếp bên trong container để ép CPU hoạt động 100%.
+3. **Xác minh & Cải tiến**: Quan sát Grafana Dashboard để xem sự gia tăng tài nguyên, kiểm tra trạng thái alert trên giao diện Prometheus, và xác nhận xem tin nhắn Slack/Telegram có nổ ra đúng thời gian cam kết hay không.
+
+### B. Lab Thực hành nhanh: Giả lập Quá tải CPU bằng Docker CLI
+Bạn có thể giả lập ngay tình huống một container ứng dụng Node.js bị rò rỉ tài nguyên (CPU Spikes) bằng cách chạy một container tạm thời bằng lệnh sau:
+```bash
+# Chạy container tạo tải CPU 100% trên 2 cores vật lý trong vòng 60 giây
+docker run --rm -it alpine sh -c "apk add --no-cache stress-ng && stress-ng --cpu 2 --timeout 60s"
+```
+Khi chạy lệnh này, hãy theo dõi Grafana Dashboard và kiểm tra xem cảnh báo `HighCPUUsage` bạn thiết lập trong Prometheus Rule có được kích hoạt thành công hay không. Đây là cách diễn tập thực chiến tuyệt vời giúp bạn tự tin rằng hệ thống tự động hóa SecOps/SRE sẽ bảo vệ bạn lúc nửa đêm khi sự cố thực xảy ra!
+
 ---
 
-## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+## 6. Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-### 🇬🇧 [Designing the Perfect Grafana Dashboard: SRE Best Practices (Thiết Kế Dashboard Grafana Hoàn Hảo: Thực Tiễn Tốt Nhất Dành Cho Kỹ Sư SRE)](./blog/designing-perfect-grafana-dashboard.md)
-*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog từ chính đội ngũ Grafana Blog được lưu trữ cục bộ.
+### 🇻🇳 [Thiết Kế Dashboard Grafana Hoàn Hảo (Designing the Perfect Grafana Dashboard)](./blog/designing-perfect-grafana-dashboard.md)
+*   **Chi tiết**: Bản dịch thuật & biên soạn chuyên sâu 100% tiếng Việt của bài blog từ chính đội ngũ Grafana Blog được lưu trữ cục bộ.
 *   **Giá trị thực tiễn**: Khám phá nguyên lý phân cấp kim tự tháp thông tin, các quy tắc UX/UI giảm nhiễu hình ảnh và các phương pháp tối ưu hóa hiệu năng truy vấn Dashboard.
 *   **Liên kết nguồn gốc**: [Grafana Blog - Designing the Perfect Grafana Dashboard](https://grafana.com/blog/2020/06/23/designing-the-perfect-grafana-dashboard/)
+
+### 🇻🇳 [Chống Cảnh Báo Tràn Lan Với Prometheus Alertmanager (Preventing Alert Fatigue)](./blog/preventing-alert-fatigue-prometheus.md)
+*   **Chi tiết**: Hướng dẫn dịch thuật và hiệu đính chi tiết từ các chuyên gia SRE hàng đầu của Robust Perception được biên soạn chuẩn kỹ thuật.
+*   **Giá trị thực tiễn**: Tìm hiểu gốc rễ của hội chứng tràn lan cảnh báo (Alert Fatigue), phương pháp cấu hình gom nhóm (Grouping), ức chế (Inhibition), trì hoãn (Silence) của Alertmanager để chỉ gửi cảnh báo thực sự có giá trị hành động cho kỹ sư On-call.
+*   **Liên kết nguồn gốc**: [Robust Perception - Prometheus Alerting Best Practices](https://www.robustperception.io/blog/)
 
 ---
 

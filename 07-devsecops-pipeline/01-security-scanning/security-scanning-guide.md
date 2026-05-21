@@ -59,17 +59,54 @@ Nếu bạn cấu hình quét bảo mật không khéo, nó có thể làm chậ
 2.  **Thiết lập Ngưỡng cảnh báo (Severity Threshold)**: Chỉ cấu hình chặn đứng (Fail/Block) pipeline đối với các lỗ hổng mức độ **CRITICAL (Nghiêm trọng)** và **HIGH (Cao)**. Các lỗ hổng mức độ MEDIUM hoặc LOW chỉ nên hiển thị cảnh báo để tránh ngắt quãng công việc của lập trình viên một cách không cần thiết.
 3.  **Tự động bỏ qua lỗi giả (Vulnerability Exception)**: Sử dụng các tệp tin cấu hình ngoại lệ (ví dụ: `.trivyignore`) để khai báo bỏ qua các lỗ hổng đã được xác nhận là an toàn hoặc không thể khai thác trong ngữ cảnh ứng dụng của bạn, tránh báo động giả (False Positive).
 
+## 4. Bảo mật Chuỗi Cung ứng Phần mềm với Sigstore/Cosign (Software Supply Chain Security)
+
+Trong thực tiễn DevSecOps nâng cao, quét bảo mật Docker Image mới chỉ là một nửa chặng đường. Một rủi ro nghiêm trọng khác trong chuỗi cung ứng phần mềm (Software Supply Chain) là: **"Làm sao đảm bảo Docker Image chạy trên Production chính là Image sạch đã vượt qua pipeline CI/CD, chứ không phải một Image bị kẻ xấu tráo đổi hoặc chèn mã độc ngay trên Registry?"**
+
+Để giải quyết bài toán này, dự án mã nguồn mở **Sigstore** (được bảo trợ bởi Linux Foundation) đã giới thiệu công cụ **Cosign** nhằm ký tên số (signing) và xác thực (verification) các container image:
+
+```
++--------------------+      +--------------------+      +--------------------+
+|  Build & Scan OK   | ---> | Ký Image bằng      | ---> | Đẩy Image & Chữ ký |
+|  (Trong Pipeline)  |      | Cosign (Key/Keyless|      | Lên Registry Hub   |
++--------------------+      +--------------------+      +--------------------+
+                                                                   |
+                                                                   v
++--------------------+      +--------------------+      +--------------------+
+| Chạy trên Prod K8s | <--- | Xác thực Chữ ký    | <--- | Kubelet Tải Image  |
+| (Ngăn tráo đổi!)   |      | Bằng Cosign Policy |      | & Chữ ký Về Node   |
++--------------------+      +--------------------+      +--------------------+
+```
+
+### A. Cơ chế hoạt động của Cosign
+1. **Ký số Image (Signing)**: Ngay sau khi Docker Image được build và quét bảo mật thành công (ví dụ bằng Trivy) trong pipeline CI/CD, Cosign sẽ sử dụng một khóa riêng tư (Private Key - hoặc cơ chế Keyless sử dụng OIDC) để ký số lên Docker Image. Chữ ký số này được đẩy trực tiếp lên Registry cùng với Image.
+2. **Xác thực Chữ ký (Verification)**: Trước khi triển khai lên cụm Kubernetes production, bộ điều khiển kiểm soát đầu vào (Admission Controller như Kyverno hoặc OPA) sẽ gọi Cosign để xác thực chữ ký của Image bằng khóa công khai (Public Key). Nếu chữ ký hợp lệ, Image được phép chạy. Nếu chữ ký sai lệch hoặc không có chữ ký (do bị hacker tráo đổi), K8s sẽ chặn đứng hành động deploy ngay lập tức!
+
+### B. Lệnh thực hành ký số Cosign cơ bản
+```bash
+# 1. Tạo cặp khóa bảo mật Cosign (cosign.key và cosign.pub)
+cosign generate-key-pair
+
+# 2. Thực hiện ký số lên Docker Image của bạn trên Docker Hub
+cosign sign --key cosign.key username/my-secure-app:latest
+
+# 3. Xác thực chữ ký của Image từ xa bằng khóa công khai
+cosign verify --key cosign.pub username/my-secure-app:latest
+```
+
 ---
 
-## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+## 5. Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-### 🇬🇧 [SAST vs DAST vs SCA: How to Choose the Right Tooling (SAST so với DAST so với SCA: Cách Lựa Chọn Bộ Công Cụ Quét Bảo Mật Tối Ưu)](./blog/sast-vs-dast-vs-sca.md)
-*   **Nguồn**: OWASP Foundation (Tổ chức an ninh mạng phi lợi nhuận uy tín nhất thế giới).
-*   **Bản dịch & Tóm tắt cốt lõi**: Bài viết so sánh toàn diện 3 trụ cột quét bảo mật cốt lõi giúp hình thành quy trình phát triển phần mềm an toàn (*SSDLC*):
-    *   **SAST (Static Application Security Testing)**: Phương pháp phân tích hộp trắng (*White-box*), quét trực tiếp mã nguồn tĩnh để tìm kiếm các lỗi lập trình phổ biến (như SQL Injection, XSS, hoặc Hardcoded Credentials) ngay khi lập trình viên viết code.
-    *   **SCA (Software Composition Analysis)**: Quét và kiểm kê toàn bộ các thư viện nguồn mở của bên thứ ba được sử dụng trong dự án, đối chiếu với kho dữ liệu lỗ hổng bảo mật toàn cầu (NVD/CVE) để ngăn chặn các thảm họa như Log4Shell hay Heartbleed từ sớm.
-    *   **DAST (Dynamic Application Security Testing)**: Phương pháp phân tích hộp đen (*Black-box*), giả lập các hành vi tấn công thực tế từ bên ngoài vào ứng dụng đang chạy ở môi trường Staging/UAT để phát hiện các lỗ hổng về cấu hình mạng, phiên làm việc và bảo mật Header.
-*   **Tại sao nên đọc?** Giúp bạn hiểu rõ ưu và nhược điểm của từng công cụ để thiết kế một hệ thống phòng thủ đa lớp (*Defense in Depth*) cho pipeline CI/CD một cách tối ưu, tránh báo động giả (*false positives*) và giảm thời gian build.
+### 🇻🇳 [Cẩm Nang Lựa Chọn Bộ Công Cụ Quét Bảo Mật Tối Ưu SAST, DAST, SCA (SAST vs DAST vs SCA)](./blog/sast-vs-dast-vs-sca.md)
+*   **Chi tiết**: Bản dịch thuật & biên soạn chuyên sâu 100% tiếng Việt từ tài liệu chính thống của OWASP Foundation.
+*   **Giá trị thực tiễn**: So sánh chi tiết 3 phương pháp quét hộp trắng, hộp đen và kiểm kê thư viện để xây dựng chiến lược phòng thủ chiều sâu (Defense in Depth) tối ưu cho pipeline.
+*   **Liên kết nguồn gốc**: [OWASP Source Code Analysis Tools](https://owasp.org/www-community/Source_Code_Analysis_Tools)
+
+### 🇻🇳 [Tích Hợp Trivy Và SonarQube Vào Pipeline CI/CD Để Tự Động Hóa Chốt Chặn Bảo Mật (Integrating Trivy & SonarQube)](./blog/integrating-trivy-sonarqube-cicd.md)
+*   **Chi tiết**: Bài viết dịch thuật và hiệu đính chi tiết từ Snyk Security Blog và kinh nghiệm thực chiến SecOps được biên soạn chất lượng.
+*   **Giá trị thực tiễn**: Hướng dẫn từng bước viết script Jenkinsfile/GitHub Actions để chạy Trivy quét Docker Image, đẩy báo cáo lên SonarQube Dashboard và thiết lập bộ quy tắc Quality Gate nhằm tự động ngăn chặn deploy nếu phát hiện lỗ hổng bảo mật nghiêm trọng.
+*   **Liên kết nguồn gốc**: [Snyk Blog - Integrating Security Scanning in CI/CD](https://snyk.io/blog/integrating-security-scanning-in-cicd/)
 
 ---
 

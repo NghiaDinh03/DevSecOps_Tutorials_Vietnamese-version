@@ -128,6 +128,7 @@ mychart/
 *   [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) — Hướng dẫn cấu hình chi tiết health checks từ Kubernetes.
 
 ### 2. Các bài viết chuyên sâu & Blog uy tín (Tiếng Việt & Tiếng Anh)
+*   🇻🇳 [Thiết Kế Cấu Trúc Helm Chart Đạt Chuẩn Production Cho Ứng Dụng Microservices](./blog/production-helm-charts-design.md) — Bài viết dịch thuật và biên soạn chuyên sâu 100% tiếng Việt từ CNCF Kubernetes Special Interest Group & Bitnami Engineering về cách thiết kế Helm Chart chuyên nghiệp, phân tách môi trường, named templates, probes và gia cố bảo mật Pod.
 *   [Kubernetes Series - Viblo (Tiếng Việt)](https://viblo.asia/tags/kubernetes) — Loạt bài viết giải thích Kubernetes từ cơ bản đến nâng cao cực kỳ dễ hiểu của cộng đồng lập trình viên Việt Nam.
 *   [Liveness vs Readiness vs Startup Probes - Kinsta Blog](https://kinsta.com/blog/kubernetes-probes/) — Phân tích chi tiết hành vi và kịch bản thực tế khi áp dụng từng loại Probe.
 *   [Helm Official Quickstart Guide](https://helm.sh/docs/intro/quickstart/) — Hướng dẫn cài đặt, tìm kiếm và sử dụng Helm chỉ trong 5 phút.

@@ -61,8 +61,56 @@ Falco Rules sử dụng định dạng YAML rất tường minh, gồm 3 thành 
 
 ---
 
+## 4. ⚔️ Diễn Tập Thực Chiến SecOps: Lab Firedrill Với Falco
+
+Để kiểm chứng khả năng phản ứng nhanh của kỹ sư SecOps trước các cuộc tấn công thời gian thực (Runtime Attacks), chúng ta sẽ tiến hành một bài diễn tập thực chiến **"SecOps Firedrill"** giả lập hành vi thâm nhập của hacker và quy trình phát hiện tự động bằng Falco.
+
+### A. Kịch bản Diễn tập (Firedrill Scenario)
+1. **Thâm nhập**: Hacker lợi dụng một lỗi bảo mật ứng dụng để truy cập thành công vào container.
+2. **Khai thác phá hoại (Malicious Activities)**:
+   * Hacker cố tình mở một terminal tương tác (`sh` hoặc `bash`) bên trong container để thám thính.
+   * Hacker thực hiện đọc trộm thông tin nhạy cảm của hệ thống bằng lệnh: `cat /etc/shadow`.
+3. **Phòng thủ & Báo động**: Falco sử dụng eBPF probe để bắt giữ toàn bộ các system call này, so khớp luật bảo mật và ngay lập tức bắn cảnh báo lên console hoặc kênh chat Slack của đội ngũ SecOps.
+
+### B. Hướng dẫn Từng Bước Diễn Tập trên Docker CLI
+Nếu bạn đã khởi chạy dịch vụ Falco trên máy chủ (qua bài lab chi tiết), bạn có thể tự mình giả lập vai trò hacker để kiểm tra hệ thống:
+
+```bash
+# 1. Khởi chạy một container ứng dụng giả lập chạy ngầm (nạn nhân)
+docker run -d --name victim-app-container alpine sleep 3600
+
+# 2. Bước diễn tập 1: Hacker thực hiện "Exec" trái phép để mở Shell
+docker exec -it victim-app-container sh
+
+# 3. Bước diễn tập 2: Bên trong container, hacker đọc trộm file nhạy cảm
+# (Chạy lệnh này trực tiếp trong terminal sh của container)
+cat /etc/shadow
+
+# Thoát ra ngoài container
+exit
+```
+
+### C. Kết Quả Cảnh Báo Từ Falco
+Ngay lập tức, bạn kiểm tra nhật ký hoạt động của container Falco bằng lệnh:
+```bash
+docker logs falco
+```
+Ref: Bạn sẽ thấy các dòng log cảnh báo màu sắc tương ứng xuất hiện:
+* `🚨 CẢNH BÁO RUNTIME: Phát hiện mở Shell trong Container... proc.cmdline=sh container_id=...`
+* `🚨 CẢNH BÁO RUNTIME: Phát hiện đọc file nhạy cảm... proc.cmdline=cat /etc/shadow container_id=...`
+
+Thông qua bài diễn tập này, bạn đã thực sự làm chủ quy trình phát hiện xâm nhập chủ động ở tầng nhân hệ điều hành, giúp bảo vệ an toàn cho hệ thống microservices trước mọi mối đe dọa ẩn mình!
+
+---
+
 ## 📚 Tài liệu đọc thêm khuyến nghị
 
+### 🇻🇳 [Diễn Tập Ứng Phó Sự Cố Runtime Thực Tế Với Falco (SecOps Firedrill)](./blog/falco-incident-response-firedrill.md)
+*   **Chi tiết**: Hướng dẫn dịch thuật và biên soạn chi tiết từ Sysdig Security Research về quy trình xây dựng kịch bản Firedrill chuyên nghiệp.
+*   **Giá trị thực tiễn**: Khám phá kiến trúc chi tiết của Falco eBPF, hướng dẫn từng bước viết luật Falco tùy biến nâng cao để bắt các hành vi tấn công tinh vi, và quy trình tự động hóa kích hoạt Incident Response (như tự động cách ly/hủy Pod khi phát hiện có mã độc).
+*   **Liên kết nguồn gốc**: [Sysdig Blog - Container Runtime Security with Falco](https://sysdig.com/blog/container-security-falco/)
+
+### 🇬🇧 Tài liệu chính thống (Official Docs)
 *   **[Falco Rules Reference](https://falco.org/docs/rules/)** — Tài liệu tra cứu toàn bộ các trường dữ liệu và cách viết filter của Falco.
 *   **[eBPF Official Website](https://ebpf.io/)** — Tìm hiểu sâu sắc công nghệ thay đổi bộ mặt hệ điều hành eBPF.
 

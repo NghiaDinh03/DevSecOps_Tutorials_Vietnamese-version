@@ -94,10 +94,15 @@ Quy trình chuẩn hóa khi làm việc với Terraform gồm 4 bước chính:
 
 ## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-### 🇬🇧 [Terraform State Deep Dive: Local vs Remote Backends and Locking (Đi Sâu Vào Trạng Thái Terraform: Bộ Lưu Trữ Cục Bộ so với Từ Xa và Cơ Chế Khóa Trạng Thái)](./blog/terraform-state-deep-dive.md)
-*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín về Terraform State từ Gruntwork Blog được lưu trữ cục bộ.
+### 🇻🇳 [Quản Lý Trạng Thái Terraform State An Toàn (Terraform State Deep Dive)](./blog/terraform-state-deep-dive.md)
+*   **Chi tiết**: Bản dịch thuật & biên soạn chuyên sâu 100% tiếng Việt của bài blog uy tín về Terraform State từ Gruntwork Blog được lưu trữ cục bộ.
 *   **Giá trị thực tiễn**: Tìm hiểu bản chất của tệp `terraform.tfstate`, so sánh lưu trữ Local vs Remote, cơ chế khóa DynamoDB và quy trình phát hiện sai lệch cấu hình (*Drift Detection*).
 *   **Liên kết nguồn gốc**: [Gruntwork Blog - Terraform State Deep Dive](https://gruntwork.io/blog/terraform-state-deep-dive-local-vs-remote-backends-and-locking/)
+
+### 🇻🇳 [Xoay Vòng Khóa Tự Động Với HashiCorp Vault Trong Terraform (Automatic Secret Rotation with Vault)](./blog/automatic-secret-rotation-vault.md)
+*   **Chi tiết**: Bài viết dịch thuật và biên soạn chi tiết từ HashiCorp Blog về giải pháp quản lý credentials động cho Terraform.
+*   **Giá trị thực tiễn**: Hướng dẫn tích hợp HashiCorp Vault vào Terraform để tạo thông tin xác thực động (Dynamic Credentials) tự động hết hạn và tự xoay vòng khóa định kỳ, loại bỏ hoàn toàn việc lưu API Key tĩnh trong mã nguồn.
+*   **Liên kết nguồn gốc**: [HashiCorp Blog - Automated Secrets Rotation with Vault](https://www.hashicorp.com/blog/automated-secrets-rotation-with-vault)
 
 ---
 

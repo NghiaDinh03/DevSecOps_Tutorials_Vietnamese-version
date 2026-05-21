@@ -50,6 +50,12 @@ graph TD
 
 ## 📚 Tài liệu đọc thêm khuyến nghị
 
+### 🇻🇳 [Threat Intelligence Tự Động Hóa Với Nền Tảng MISP (MISP Automation)](./blog/misp-threat-intelligence-automation.md)
+*   **Chi tiết**: Bản dịch thuật & hiệu đính chuyên sâu 100% tiếng Việt từ MISP Project Project Lead.
+*   **Giá trị thực tiễn**: Khám phá kiến trúc dữ liệu sự kiện (Events/Attributes) trong MISP, hướng dẫn chi tiết cách viết mã Python (PyMISP) để tự động hóa việc truy vấn và lấy các IOCs độc hại (IP/Domain) mới nhất, và phương pháp đẩy các IOCs này trực tiếp vào hệ thống tường lửa (Firewall/IDS/WAF) của doanh nghiệp để tự động hóa hoàn toàn chốt chặn phòng ngự.
+*   **Liên kết nguồn gốc**: [MISP Project - Automation and API](https://www.misp-project.org/documentation/)
+
+### 🇬🇧 Tài liệu chính thống (Official Docs)
 *   **[MISP Book - Official Documentation](https://www.misp-project.org/documentation/)** — Hướng dẫn toàn diện cài đặt, sử dụng và tích hợp MISP API.
 *   **[The Pyramid of Pain - David J. Bianco Blog](https://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html)** — Bài viết gốc khai sinh khái niệm Pyramid of Pain nổi tiếng ngành SecOps.
 

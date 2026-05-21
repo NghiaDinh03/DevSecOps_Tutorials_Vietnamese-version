@@ -69,6 +69,12 @@ Tích hợp Compliance-as-Code giúp tổ chức đạt được **Gia cố bả
 
 ## 📚 Tài liệu đọc thêm khuyến nghị
 
+### 🇻🇳 [Triển Khai Compliance-as-Code Kiểm Soát Tuân Thủ Tự Động Với OPA & Conftest](./blog/compliance-as-code-opa-conftest.md)
+*   **Chi tiết**: Bản dịch thuật & hiệu đính chuyên sâu 100% tiếng Việt từ Styra (nhà sáng lập dự án OPA) về thực tế kiểm soát tuân thủ an toàn thông tin.
+*   **Giá trị thực tiễn**: Khám phá kiến trúc OPA Policy Engine, hướng dẫn chi tiết cách viết các quy tắc Rego thực chiến kiểm duyệt Dockerfile/K8s Manifest, và quy trình tích hợp Conftest vào Git Commit Hook nhằm ngăn ngừa lỗ hổng bảo mật sớm nhất từ máy lập trình viên.
+*   **Liên kết nguồn gốc**: [Styra Blog - Compliance-as-Code using Open Policy Agent](https://www.styra.com/blog/)
+
+### 🇬🇧 Tài liệu chính thống (Official Docs)
 *   **[Open Policy Agent - Rego Policy Language](https://www.openpolicyagent.org/docs/latest/policy-language/)** — Hướng dẫn chi tiết cú pháp viết mã Rego từ CNCF.
 *   **[Conftest Documentation](https://www.conftest.dev/)** — Hướng dẫn viết test và chạy Conftest trong CI/CD.
 

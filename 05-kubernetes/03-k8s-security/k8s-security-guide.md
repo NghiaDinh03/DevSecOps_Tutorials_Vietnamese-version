@@ -112,10 +112,15 @@ Cho dù bạn đã cấu hình tĩnh rất tốt, các cuộc tấn công thời
 
 ## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-### 🇬🇧 [A Complete Guide to Kubernetes Security Context (Hướng Dẫn Toàn Diện Về Kubernetes Security Context)](./blog/k8s-security-context-datadog.md)
-*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog vô cùng nổi tiếng từ đội ngũ kỹ sư Datadog được lưu trữ cục bộ.
+### 🇻🇳 [Hướng Dẫn Toàn Diện Về Kubernetes Security Context (Kubernetes Security Context Guide)](./blog/k8s-security-context-datadog.md)
+*   **Chi tiết**: Bản dịch thuật & biên soạn chuyên sâu 100% tiếng Việt của bài blog vô cùng nổi tiếng từ đội ngũ kỹ sư Datadog được lưu trữ cục bộ.
 *   **Giá trị thực tiễn**: Đi sâu mổ xẻ từng trường cấu hình trong `securityContext` ở cả cấp độ Pod và Container như `runAsNonRoot`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem` và `capabilities` để gia cố an toàn tối đa cho container.
 *   **Liên kết nguồn gốc**: [Datadog Blog - A Complete Guide to Kubernetes Security Context](https://www.datadog.com/blog/kubernetes-security-context/)
+
+### 🇻🇳 [10 Quy Tắc Thiết Kế Network Policies Thực Chiến Trong Kubernetes (10 Network Policies Best Practices)](./blog/k8s-network-policies-best-practices.md)
+*   **Chi tiết**: Bài viết dịch thuật và biên soạn chi tiết từ các chuyên gia bảo mật CNCF về thiết lập chính sách mạng trong Kubernetes.
+*   **Giá trị thực tiễn**: Hướng dẫn chi tiết từng dòng YAML cho 10 kịch bản mạng thực tế: từ default-deny, cô lập namespace, giới hạn kết nối DB, chặn traffic chiều ra (egress) đến tối ưu hóa hiệu năng mạng của cụm cluster.
+*   **Liên kết nguồn gốc**: [Kubernetes Documentation - Network Policies Best Practices](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 ---
 

@@ -127,3 +127,12 @@ MÔ PHỎNG AN NINH CONTAINER PIPELINE:
 1.  *Tại sao việc cô lập hoàn toàn tài khoản lưu trữ Credentials Database trên Jenkins Controller và cấm Controller chạy các executors lại là nguyên lý bảo mật bắt buộc?*
 2.  *Phân tích luồng tấn công chi tiết khi kẻ tấn công lợi dụng tệp `/var/run/docker.sock` được mount vào container để leo thang chiếm quyền root của máy host vật lý.*
 3.  *Kaniko thực hiện việc đóng gói và xây dựng các lớp (Layers) của Docker Image thế nào mà không cần sự can thiệp của Docker daemon?*
+
+---
+
+## 5. Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+### 🇻🇳 [Bảo Mật Jenkins Và GitLab Runners Trong Môi Trường Doanh Nghiệp (Securing Jenkins & GitLab Runners)](./blog/securing-jenkins-gitlab-runners.md)
+*   **Chi tiết**: Hướng dẫn toàn diện về bảo mật máy chủ CI/CD Jenkins và hệ thống GitLab Runners theo chuẩn DevSecOps quốc tế được dịch và biên soạn kỹ lưỡng.
+*   **Giá trị thực tiễn**: Nắm vững các bước thiết lập firewall cô lập mạng, cấu hình TLS, phân quyền Role-Based Access Control (RBAC), quét mã độc pipeline và cô lập an toàn môi trường chạy Docker trong thực tế.
+*   **Liên kết nguồn gốc**: [GitLab Security Blog - Securing GitLab Runner](https://docs.gitlab.com/ee/ci/runners/security.html)
