@@ -1,4 +1,4 @@
-# 🐧 Linux & Networking — Hệ Điều Hành & Mạng Máy Tính Căn Bản
+# 🐧 Sub-module 01: Linux & Networking — Hệ Điều Hành & Mạng Máy Tính Căn Bản
 
 > **Mục tiêu (Objectives)**: Làm chủ kiến trúc hệ điều hành Linux, cơ chế phân quyền tập tin bảo mật nâng cao và các khái niệm mạng cốt lõi (TCP/IP, DNS, Routing) phục vụ trực tiếp cho việc vận hành container và cụm Kubernetes.
 
@@ -127,3 +127,13 @@ Khi một gói tin được gửi đi, máy tính sử dụng **Bảng định t
 1. *Tại sao một tệp thực thi mang thuộc tính SUID của user `root` lại là mục tiêu tấn công hàng đầu của tin tặc khi đột nhập vào máy chủ Linux?*
 2. *Mô tả chi tiết hậu quả xảy ra nếu một trong ba bước của quá trình bắt tay TCP (TCP Three-way Handshake) bị gián đoạn hoặc thất bại?*
 3. *Làm thế nào để cấu hình file `/etc/hosts` trên máy Linux local của bạn trỏ tên miền `vulnerable-app.local` về địa chỉ loopback `127.0.0.1`?*
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+### 🇻🇳 [Linux Networking Troubleshooting: A Practical Guide (Chẩn Đoán Sự Cố Mạng Linux: Hướng Dẫn Thực Hành Thực Tế)](./blog/linux-networking-troubleshooting.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín đạt 12k+ views từ cộng đồng Viblo.asia được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Hướng dẫn quy trình 5 bước gỡ lỗi mạng Linux thực tế thông qua các lệnh `ping`, `traceroute/mtr`, `nslookup/dig`, `ss/netstat` và `tcpdump`.
+*   **Liên kết nguồn gốc**: [Viblo.asia - Linux Networking Troubleshooting](https://viblo.asia/p/linux-networking-troubleshooting-a-practical-guide-ByEZk6nxlQ0)
+

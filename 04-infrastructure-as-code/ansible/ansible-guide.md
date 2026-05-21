@@ -78,10 +78,12 @@ Tự động hóa gia cố bảo mật (Security Hardening) là ứng dụng qua
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-*   [Ansible Documentation - Official](https://docs.ansible.com/) — Hướng dẫn tra cứu toàn bộ các module và cú pháp playbook chính thức.
-*   [DevSecOps Ansible Hardening Roles - DevSec](https://dev-sec.io/) — Cộng đồng chia sẻ các Ansible Roles được viết sẵn để gia cố bảo mật OS chuẩn an ninh quốc tế (CIS Benchmarks).
+### 🇬🇧 [OS Hardening with Ansible: Implementing CIS Benchmarks Automatically (Gia Cố Bảo Mật Hệ Điều Hành Bằng Ansible: Tự Động Hóa Triển Khai Tiêu Chuẩn Bảo Mật CIS)](./blog/os-hardening-ansible.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín từ Dev-Sec.io được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Khám phá quy trình tự động hóa OS Hardening 4 tầng (SSH, Kernel sysctl, file permissions, firewall) sử dụng Ansible để nâng cao an ninh hạ tầng chuẩn CIS Benchmarks.
+*   **Liên kết nguồn gốc**: [Dev-Sec.io - OS Hardening with Ansible](https://dev-sec.io/)
 
 ---
 

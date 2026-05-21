@@ -1,4 +1,4 @@
-# 🛠️ Jenkins & GitLab CI — Kiến Trúc Phân Tán & An Ninh Bảo Mật Pipeline Containerization
+# 🛠️ Sub-module 02: Jenkins & GitLab CI — Kiến Trúc Phân Tán & An Ninh Bảo Mật Pipeline Containerization
 
 > **Mục tiêu (Objectives)**: Nắm vững mô hình vận hành điều phối Controller-Agent của Jenkins và cơ chế Executor của GitLab CI. Phân tích sâu sắc bản chất an ninh của các giải pháp chạy container trong pipeline (Docker Socket Binding vs DinD) và làm chủ các công nghệ đóng gói container an toàn (như Kaniko).
 

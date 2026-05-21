@@ -1,4 +1,4 @@
-# 🐙 Docker Compose — Quản lý & Phối hợp Ứng dụng Đa Container
+# 🐙 Sub-module 02: Docker Compose — Quản lý & Phối hợp Ứng dụng Đa Container
 
 > **Mục tiêu**: Làm chủ Docker Compose để định nghĩa, chạy và quản lý vòng đời ứng dụng phức tạp gồm nhiều dịch vụ liên kết chặt chẽ (microservices) một cách an toàn và tự động hóa cao.
 

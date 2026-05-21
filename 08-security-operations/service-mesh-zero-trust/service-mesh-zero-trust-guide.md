@@ -94,10 +94,12 @@ Istio cung cấp các tài nguyên YAML (Kubernetes Custom Resources) để cấ
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-*   **[Istio Security Documentation](https://istio.io/latest/docs/concepts/security/)** — Hướng dẫn toàn diện cơ chế xác thực và phân quyền của Istio.
-*   **[Mutual TLS Deep Dive - Istio Guide](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/)** — Quy trình chuyển đổi hệ thống sang STRICT mTLS không downtime.
+### 🇬🇧 [mTLS in Service Mesh: Under the Hood of Mutual TLS (Giải Mã Cơ Chế mTLS Trong Service Mesh: Khám Phá Chi Tiết Dưới Lớp Vỏ Mutual TLS)](./blog/mtls-service-mesh.md)
+*   **Chi tiết**: Bản dịch thuật chuyên sâu 100% tiếng Việt của bài blog uy tín về mTLS từ cộng đồng Istio/Envoy được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Hiểu rõ sự khác biệt giữa TLS một chiều và mTLS, cơ chế định danh SPIFFE ID, quy trình cấp phát và xoay vòng chứng chỉ qua Istiod (CA) & SDS, và cách iptables đánh chặn lưu lượng mạng.
+*   **Liên kết nguồn gốc**: [Istio Blog - Mutual TLS Deep Dive](https://istio.io/latest/docs/concepts/security/)
 
 ---
 

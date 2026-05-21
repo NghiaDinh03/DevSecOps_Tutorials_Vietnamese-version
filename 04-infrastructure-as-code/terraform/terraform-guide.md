@@ -92,11 +92,12 @@ Quy trình chuẩn hóa khi làm việc với Terraform gồm 4 bước chính:
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-*   [Terraform Registry - Providers Docs](https://registry.terraform.io/) — Tra cứu cú pháp các tài nguyên của AWS, Docker, Kubernetes... chính thức.
-*   [Terraform Best Practices](https://www.terraform-best-practices.com/) — Hướng dẫn tổ chức thư mục, cấu hình biến và tối ưu hóa module Terraform.
-*   [tfsec Documentation](https://aquasecurity.github.io/tfsec/) — Danh mục các quy tắc an toàn bảo mật khi viết Terraform.
+### 🇬🇧 [Terraform State Deep Dive: Local vs Remote Backends and Locking (Đi Sâu Vào Trạng Thái Terraform: Bộ Lưu Trữ Cục Bộ so với Từ Xa và Cơ Chế Khóa Trạng Thái)](./blog/terraform-state-deep-dive.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín về Terraform State từ Gruntwork Blog được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Tìm hiểu bản chất của tệp `terraform.tfstate`, so sánh lưu trữ Local vs Remote, cơ chế khóa DynamoDB và quy trình phát hiện sai lệch cấu hình (*Drift Detection*).
+*   **Liên kết nguồn gốc**: [Gruntwork Blog - Terraform State Deep Dive](https://gruntwork.io/blog/terraform-state-deep-dive-local-vs-remote-backends-and-locking/)
 
 ---
 

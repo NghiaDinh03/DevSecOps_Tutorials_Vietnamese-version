@@ -74,10 +74,12 @@ Nếu Prometheus xuất sắc trong việc **thu thập và lưu trữ**, thì *
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-*   **[Prometheus Official Querying Guide](https://prometheus.io/docs/prometheus/latest/querying/basics/)** — Hướng dẫn chi tiết cú pháp viết PromQL từ cơ bản đến nâng cao.
-*   **[Grafana Dashboards Library](https://grafana.com/grafana/dashboards/)** — Kho lưu trữ hàng ngàn template Dashboard thiết kế sẵn từ cộng đồng (chỉ cần copy ID và import để có ngay dashboard tuyệt đẹp).
+### 🇬🇧 [Designing the Perfect Grafana Dashboard: SRE Best Practices (Thiết Kế Dashboard Grafana Hoàn Hảo: Thực Tiễn Tốt Nhất Dành Cho Kỹ Sư SRE)](./blog/designing-perfect-grafana-dashboard.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog từ chính đội ngũ Grafana Blog được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Khám phá nguyên lý phân cấp kim tự tháp thông tin, các quy tắc UX/UI giảm nhiễu hình ảnh và các phương pháp tối ưu hóa hiệu năng truy vấn Dashboard.
+*   **Liên kết nguồn gốc**: [Grafana Blog - Designing the Perfect Grafana Dashboard](https://grafana.com/blog/2020/06/23/designing-the-perfect-grafana-dashboard/)
 
 ---
 

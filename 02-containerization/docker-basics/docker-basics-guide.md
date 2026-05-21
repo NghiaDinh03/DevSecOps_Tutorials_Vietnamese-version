@@ -1,4 +1,4 @@
-# 🐳 Docker Basics — Kiến Thức Nền Tảng Lõi & Gia Cố An Toàn Docker Image
+# 🐳 Sub-module 01: Docker Basics — Kiến Thức Nền Tảng Lõi & Gia Cố An Toàn Docker Image
 
 > **Mục tiêu (Objectives)**: Hiểu sâu sắc bản chất vận hành ở mức độ nhân hệ điều hành của Container, cấu trúc hệ thống tập tin xếp chồng của Docker Image, nắm vững vòng đời của Docker Image và làm chủ các kỹ thuật xây dựng Dockerfile an toàn tuyệt đối (Security-first) chuẩn Production.
 
@@ -181,3 +181,13 @@ docker run --read-only --tmpfs /tmp -p 3000:3000 devsecops-gemma-app
 1. *Tại sao việc chia sẻ chung Kernel của máy Host lại khiến Container khởi động nhanh hơn rất nhiều so với Virtual Machine?*
 2. *Cơ chế Copy-on-Write (CoW) hoạt động như thế nào khi container thực hiện chỉnh sửa một file cấu hình nằm ở Layer 1 của Image?*
 3. *Tại sao Dockerfile Multi-stage Build lại đóng vai trò cực kỳ quan trọng trong việc bảo vệ an toàn thông tin cho Pipeline CI/CD?*
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+### 🇬🇧 [Optimizing Docker Images for Production: Multi-stage Builds and Distroless (Tối Ưu Hóa Docker Image Cho Môi Trường Production: Multi-stage Builds và Distroless)](./blog/optimizing-docker-images.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín từ Snyk Blog được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Khám phá kỹ thuật đóng gói đa tầng (*Multi-stage builds*) để giảm kích thước image tới 90% và cơ chế bảo mật tối thượng của *Distroless Images* của Google.
+*   **Liên kết nguồn gốc**: [Snyk Blog - Optimizing Docker Images for Production](https://snyk.io/blog/optimizing-docker-images-for-production/)
+

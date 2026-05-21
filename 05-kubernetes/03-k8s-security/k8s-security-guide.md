@@ -110,19 +110,12 @@ Cho dù bạn đã cấu hình tĩnh rất tốt, các cuộc tấn công thời
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị (Recommended Readings)
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-Hãy bổ sung kiến thức bảo mật từ các tài liệu hàng đầu thế giới:
-
-### 1. Tài liệu chính thống (Official Docs)
-*   [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) — Chi tiết cấu hình các luật ingress, egress và các ví dụ cô lập mạng thực tế.
-*   [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) — Hướng dẫn chi tiết cách tạo Roles, RoleBindings và kiểm tra phân quyền bằng `kubectl auth can-i`.
-*   [Pod Security Standards (PSS)](https://kubernetes.io/docs/concepts/security/pod-security-standards/) — Tìm hiểu 3 cấp độ bảo mật mặc định: Privileged, Baseline, và Restricted.
-
-### 2. Các bài viết chuyên sâu & Blog uy tín (Tiếng Việt & Tiếng Anh)
-*   [Kubernetes Security Hardening - Viblo (Tiếng Việt)](https://viblo.asia/p/bao-mat-trong-kubernetes-cai-nhin-tong-quan-Lq53q1oR5ed) — Bài phân tích toàn diện về các attack vector phổ biến trên K8s và cách gia cố.
-*   [A Complete Guide to Kubernetes Security Context - Datadog Blog](https://www.datadog.com/blog/kubernetes-security-context/) — Hướng dẫn trực quan cách cấu hình Security Context an toàn nhất cho Container.
-*   [Getting Started with Falco Runtime Security](https://falco.org/docs/) — Trang chủ tài liệu chính thức của Falco để học cách viết luật giám sát runtime.
+### 🇬🇧 [A Complete Guide to Kubernetes Security Context (Hướng Dẫn Toàn Diện Về Kubernetes Security Context)](./blog/k8s-security-context-datadog.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog vô cùng nổi tiếng từ đội ngũ kỹ sư Datadog được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Đi sâu mổ xẻ từng trường cấu hình trong `securityContext` ở cả cấp độ Pod và Container như `runAsNonRoot`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem` và `capabilities` để gia cố an toàn tối đa cho container.
+*   **Liên kết nguồn gốc**: [Datadog Blog - A Complete Guide to Kubernetes Security Context](https://www.datadog.com/blog/kubernetes-security-context/)
 
 ---
 

@@ -1,4 +1,4 @@
-# 📜 Scripting & Automation — Tự Động Hóa Bằng Kịch Bản Bash/Python & Lập Lịch Cron
+# 📜 Sub-module 02: Scripting & Automation — Tự Động Hóa Bằng Kịch Bản Bash/Python & Lập Lịch Cron
 
 > **Mục tiêu (Objectives)**: Làm chủ cú pháp kịch bản Bash shell, lập trình tự động hóa Python cơ bản và cơ chế lập lịch tác vụ tự động bằng Cronjob để tự động hóa các hoạt động quản trị hệ thống và kiểm tra an ninh mạng.
 

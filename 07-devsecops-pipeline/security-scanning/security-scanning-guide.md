@@ -61,10 +61,15 @@ Nếu bạn cấu hình quét bảo mật không khéo, nó có thể làm chậ
 
 ---
 
-## 📚 Tài liệu đọc thêm khuyến nghị
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
 
-*   **[Trivy Documentation - Official](https://aquasecurity.github.io/trivy/latest/)** — Hướng dẫn chi tiết các chế độ quét (fs, image, k8s, config) của Trivy.
-*   **[OWASP ZAP Automation Framework](https://www.zaproxy.org/docs/automate/)** — Cách tự động hóa quét bảo mật động DAST trong CI/CD.
+### 🇬🇧 [SAST vs DAST vs SCA: How to Choose the Right Tooling (SAST so với DAST so với SCA: Cách Lựa Chọn Bộ Công Cụ Quét Bảo Mật Tối Ưu)](./blog/sast-vs-dast-vs-sca.md)
+*   **Nguồn**: OWASP Foundation (Tổ chức an ninh mạng phi lợi nhuận uy tín nhất thế giới).
+*   **Bản dịch & Tóm tắt cốt lõi**: Bài viết so sánh toàn diện 3 trụ cột quét bảo mật cốt lõi giúp hình thành quy trình phát triển phần mềm an toàn (*SSDLC*):
+    *   **SAST (Static Application Security Testing)**: Phương pháp phân tích hộp trắng (*White-box*), quét trực tiếp mã nguồn tĩnh để tìm kiếm các lỗi lập trình phổ biến (như SQL Injection, XSS, hoặc Hardcoded Credentials) ngay khi lập trình viên viết code.
+    *   **SCA (Software Composition Analysis)**: Quét và kiểm kê toàn bộ các thư viện nguồn mở của bên thứ ba được sử dụng trong dự án, đối chiếu với kho dữ liệu lỗ hổng bảo mật toàn cầu (NVD/CVE) để ngăn chặn các thảm họa như Log4Shell hay Heartbleed từ sớm.
+    *   **DAST (Dynamic Application Security Testing)**: Phương pháp phân tích hộp đen (*Black-box*), giả lập các hành vi tấn công thực tế từ bên ngoài vào ứng dụng đang chạy ở môi trường Staging/UAT để phát hiện các lỗ hổng về cấu hình mạng, phiên làm việc và bảo mật Header.
+*   **Tại sao nên đọc?** Giúp bạn hiểu rõ ưu và nhược điểm của từng công cụ để thiết kế một hệ thống phòng thủ đa lớp (*Defense in Depth*) cho pipeline CI/CD một cách tối ưu, tránh báo động giả (*false positives*) và giảm thời gian build.
 
 ---
 

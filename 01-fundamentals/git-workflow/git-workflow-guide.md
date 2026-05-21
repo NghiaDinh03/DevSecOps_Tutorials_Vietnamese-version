@@ -1,4 +1,4 @@
-# 🐙 Git Workflow — Cơ Chế Lưu Trữ Lõi Git & Quy Trình Làm Việc Phân Nhánh Bảo Mật
+# 🐙 Sub-module 03: Git Workflow — Cơ Chế Lưu Trữ Lõi Git & Quy Trình Làm Việc Phân Nhánh Bảo Mật
 
 > **Mục tiêu (Objectives)**: Hiểu sâu sắc cơ chế lưu trữ đối tượng bên dưới của Git, làm chủ phương pháp xác thực bảo mật (SSH, GPG Sign) và áp dụng chiến lược phân nhánh an toàn (Gitflow, Protected Branches) trong quy trình phát triển phần mềm hiện đại.
 
@@ -87,3 +87,13 @@ Trong DevSecOps, ta bắt buộc phải cấu hình quy tắc bảo vệ nhánh 
 1. *Tại sao đối tượng Blob trong Git lại không lưu trữ tên tệp tin? Cấu trúc nào trong Git đảm nhận nhiệm vụ liên kết tên file với nội dung Blob?*
 2. *Nguy cơ an ninh gì xảy ra nếu bạn vô tình chia sẻ hoặc bị rò rỉ khóa bí mật Private Key SSH của mình lên mạng internet?*
 3. *Tại sao quy tắc bảo vệ nhánh Protected Branch kết hợp bắt buộc Code Review lại là tấm khiên phòng thủ vững chắc ngăn chặn mã độc lọt vào Production?*
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+### 🇬🇧 [Gitflow Workflow: Best Practices for Team Collaboration (Quy Trình Làm Việc Gitflow: Thực Tiễn Tốt Nhất Để Làm Việc Nhóm An Toàn)](./blog/gitflow-workflow-best-practices.md)
+*   **Chi tiết**: Bản dịch thuật & tóm tắt chuyên sâu 100% tiếng Việt của bài blog uy tín về mô hình Gitflow từ Atlassian được lưu trữ cục bộ.
+*   **Giá trị thực tiễn**: Chi tiết cách phân chia và quản lý các nhánh `main`, `develop`, `feature`, `release`, và `hotfix` để cộng tác nhóm an toàn trong môi trường DevSecOps.
+*   **Liên kết nguồn gốc**: [Atlassian Git Blog - Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
