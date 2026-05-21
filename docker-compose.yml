@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  portal-service:
+    build:
+      context: ./portal
+      dockerfile: Dockerfile
+    container_name: devsecops-portal
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - NODE_ENV=production
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workspace
+    restart: always
+    depends_on:
+      - workspace-terminal
+
+  workspace-terminal:
+    build:
+      context: ./workspace
+      dockerfile: Dockerfile
+    container_name: workspace-terminal
+    stdin_open: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workspace
+    restart: always

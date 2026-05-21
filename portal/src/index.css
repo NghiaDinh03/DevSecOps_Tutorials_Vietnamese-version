@@ -1,0 +1,201 @@
+/* --- DEVSECOPS PORTAL PREMIUM CORE STYLES --- */
+:root {
+  --bg-deep: #070913;
+  --bg-dark: #0f1322;
+  --bg-card: rgba(20, 27, 45, 0.55);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --border-neon: rgba(168, 85, 247, 0.25);
+  
+  --primary-glow: #38bdf8;
+  --accent-neon: #a855f7;
+  --success-glow: #10b981;
+  --warning-glow: #f59e0b;
+  --danger-glow: #ef4444;
+  
+  --text-primary: #f3f4f6;
+  --text-muted: #9ca3af;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glow-hover:hover {
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Neon Text Glow */
+.neon-text-blue {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+.neon-text-purple {
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* Premium Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+  }
+}
+
+.active-pulse {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Dynamic Grid Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.8) 0%, rgba(7, 9, 19, 1) 90%);
+}
+
+/* Typography styles for dynamically parsed Markdown */
+.markdown-body {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: #e5e7eb;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body h1 {
+  font-size: 1.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 1.4rem;
+  color: var(--primary-glow);
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #f472b6;
+}
+
+.markdown-body pre {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #090c15;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-x: auto;
+  position: relative;
+}
+
+.markdown-body pre code {
+  background: transparent;
+  padding: 0;
+  color: #818cf8;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.markdown-body th, .markdown-body td {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+.markdown-body th {
+  background: rgba(56, 189, 248, 0.08);
+  font-weight: 600;
+}
+
+.markdown-body tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Xterm.js styling integration */
+.terminal-wrapper {
+  background-color: #05070f;
+  padding: 12px;
+  border-radius: 8px;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.xterm {
+  height: 100%;
+}
+
+.xterm-viewport {
+  background-color: #05070f !important;
+}

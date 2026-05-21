@@ -1,0 +1,29 @@
+{
+  "name": "devsecops-portal",
+  "version": "1.0.0",
+  "description": "Interactive Web Portal for DevSecOps Tutorials",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "dockerode": "^3.3.5",
+    "dompurify": "^3.0.6",
+    "express": "^4.18.2",
+    "lucide-react": "^0.294.0",
+    "marked": "^9.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ws": "^8.14.2",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.0.0"
+  }
+}

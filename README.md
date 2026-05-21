@@ -27,6 +27,19 @@
 
 ---
 
+## 🖥️ DevSecOps Interactive Lab Portal (Web UI All-in-One)
+
+> [!TIP]
+> **Trải nghiệm học tập thế hệ mới!** Dự án tích hợp sẵn một **Giao diện Web Tương tác All-in-One** cực kỳ cao cấp. Bạn có thể vừa đọc tài liệu hướng dẫn trực quan, vừa bật/tắt các container của bài lab (qua Docker Socket) và thực hành gõ lệnh bảo mật trực tiếp trên trình duyệt (qua Terminal Emulator kết nối trực tiếp vào Container Workspace).
+
+Chỉ với đúng một câu lệnh duy nhất từ thư mục gốc của dự án:
+```bash
+docker compose up -d --build
+```
+Sau đó, mở trình duyệt truy cập: **`http://localhost:8000`** để bắt đầu hành trình chinh phục DevSecOps!
+
+---
+
 ## 🎯 Giới thiệu
 
 **DevSecOps Tutorials (Vietnamese version)** là dự án mã nguồn mở được xây dựng nhằm cung cấp một hệ thống tài liệu và phòng thí nghiệm (Labs) thực hành DevSecOps hoàn chỉnh, trực quan và dễ tiếp cận nhất cho kỹ sư Việt Nam.
