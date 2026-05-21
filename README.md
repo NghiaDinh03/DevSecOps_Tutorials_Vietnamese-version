@@ -13,6 +13,7 @@
 ## 📋 Mục lục
 
 - [Giới thiệu](#-giới-thiệu)
+- [Hướng dẫn Cài đặt Docker (Bắt buộc)](docker-setup.md)
 - [Tại sao DevSecOps?](#-tại-sao-devsecops)
 - [Lộ trình học](#-lộ-trình-học)
 - [Dự án thực hành](#-dự-án-thực-hành)
@@ -32,7 +33,7 @@
 
 - 🇻🇳 **100% tiếng Việt** — Không rào cản ngôn ngữ
 - 🤖 **AI hỗ trợ** — Sử dụng AI Agent (Gemini, Claude, GPT) làm trợ lý học tập và coding
-- 🐳 **Docker-first** — Mọi bài lab đều chạy bằng `docker-compose` duy nhất
+- 🐳 **Docker-first** — Mọi bài lab đều chạy bằng `docker-compose` duy nhất ([Hướng dẫn Cài đặt Docker & Compose](docker-setup.md))
 - 🔒 **Security-first** — Tích hợp bảo mật ngay từ đầu, không phải afterthought
 - 📈 **Từ cơ bản đến nâng cao** — Lộ trình rõ ràng theo roadmap.sh
 
