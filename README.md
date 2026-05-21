@@ -13,6 +13,7 @@
 ## 📋 Mục lục
 
 - [Giới thiệu](#-giới-thiệu)
+- [Lời nói đầu (Preface)](#-lời-nói-đầu-preface)
 - [Hướng dẫn Cài đặt Docker (Bắt buộc)](docker-setup.md)
 - [Tại sao DevSecOps?](#-tại-sao-devsecops)
 - [Lộ trình học](#-lộ-trình-học)
@@ -36,6 +37,19 @@
 - 🐳 **Docker-first** — Mọi bài lab đều chạy bằng `docker-compose` duy nhất ([Hướng dẫn Cài đặt Docker & Compose](docker-setup.md))
 - 🔒 **Security-first** — Tích hợp bảo mật ngay từ đầu, không phải afterthought
 - 📈 **Từ cơ bản đến nâng cao** — Lộ trình rõ ràng theo roadmap.sh
+
+### ✍️ Lời nói đầu (Preface)
+
+Giáo trình **DevSecOps Tutorials (Vietnamese version)** được sinh ra với mục tiêu thu hẹp khoảng cách giữa lý thuyết hệ thống và thực tế vận hành an toàn thông tin tại các doanh nghiệp. Chúng tôi hiểu rằng, học DevSecOps không chỉ là học cách cấu hình công cụ, mà là thay đổi tư duy làm việc.
+
+Điểm đặc biệt nhất của giáo trình này là việc **chuẩn hóa và xuyên suốt sử dụng một bộ công cụ công nghệ thống nhất (Unified Technology Stack)**, được tích hợp chặt chẽ từ những bước cơ bản nhất đến những hệ thống phân tán phức tạp ở mức độ doanh nghiệp (Enterprise-level):
+
+1. **Hạt nhân Vận hành & Đóng gói (Docker & Docker Compose)**: Xuyên suốt tất cả các Module, từ việc tìm hiểu Linux, Web app cho đến các hệ thống CI/CD phân tán hay Service Mesh, mọi môi trường thực hành đều được đóng gói **Docker-first**. Học viên chỉ cần chạy **một câu lệnh duy nhất** (`docker compose up -d`) để kích hoạt toàn bộ lab, giảm thiểu tối đa thời gian cấu hình và tránh gây ảnh hưởng đến môi trường máy cá nhân.
+2. **Quản trị & Điều phối Hạ tầng (Kubernetes, Helm, Terraform, Ansible)**: Di chuyển từ local lên môi trường cluster chuyên nghiệp (Module 4 & 5), học viên tiếp cận cách khai báo hạ tầng dạng code (IaC) và điều phối container an toàn theo chuẩn Cloud-Native.
+3. **Bảo mật dịch chuyển về phía trước (Shift-Left Security)**: Tích hợp trực tiếp các công cụ quét bảo mật hàng đầu như **Trivy** (quét lỗ hổng image), **SonarQube** (quét mã nguồn tĩnh SAST), **Gitleaks** (chặn rò rỉ secrets) và **Open Policy Agent (Conftest)** ngay trong pipeline CI/CD để thực thi chính sách bảo mật tự động.
+4. **Giám sát & Vận hành Runtime (Prometheus, Grafana, Loki, Falco, Istio)**: Giám sát toàn diện tài nguyên, phân tích log tập trung, phát hiện xâm nhập runtime thời gian thực và mã hóa giao tiếp microservices thông qua mô hình mạng an toàn Zero-Trust.
+
+Tất cả những công nghệ trên được kết nối logic với nhau, giúp bạn không chỉ học đơn lẻ từng công cụ mà thực sự hiểu cách phối hợp chúng để xây dựng một hệ sinh thái DevSecOps hoàn chỉnh và an toàn tuyệt đối.
 
 ---
 
