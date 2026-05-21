@@ -34,7 +34,7 @@
 
 Chỉ với đúng một câu lệnh duy nhất từ thư mục gốc của dự án:
 ```bash
-docker compose up -d --build
+cd portal-platform && docker compose up -d --build
 ```
 Sau đó, mở trình duyệt truy cập: **`http://localhost:8000`** để bắt đầu hành trình chinh phục DevSecOps!
 

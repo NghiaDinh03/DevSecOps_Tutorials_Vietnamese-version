@@ -13,7 +13,7 @@ services:
       - NODE_ENV=production
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./:/workspace
+      - ../:/workspace
     restart: always
     depends_on:
       - workspace-terminal
@@ -27,5 +27,5 @@ services:
     tty: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./:/workspace
+      - ../:/workspace
     restart: always

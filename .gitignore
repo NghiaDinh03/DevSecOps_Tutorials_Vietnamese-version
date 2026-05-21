@@ -44,3 +44,9 @@ docker-compose.override.yml
 
 # Ansible
 *.retry
+
+# Frontend builds
+dist/
+build/
+.tsbuildinfo
+
