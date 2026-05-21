@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Vault Server ở chế độ Development (Tự động unseal, có sẵn root token tĩnh)
+  vault:
+    image: hashicorp/vault:1.13.3
+    container_name: devsecops-vault-server
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=dev-root-token
+      - VAULT_ADDR=http://127.0.0.1:8200
+    networks:
+      - devsecops-network
+
+  # Provisioner: Tự động chạy lệnh nạp secret vào Vault khi Vault Server sẵn sàng
+  vault-provisioner:
+    image: hashicorp/vault:1.13.3
+    container_name: devsecops-vault-provisioner
+    environment:
+      - VAULT_ADDR=http://vault:8200
+      - VAULT_TOKEN=dev-root-token
+    entrypoint: >
+      sh -c "
+      echo 'Đang đợi Vault Server sẵn sàng...' &&
+      until vault status; do sleep 1; done &&
+      echo 'Vault đã sẵn sàng. Tiến hành nạp secret...' &&
+      vault kv put secret/payment-api api_key=stripe-live-token-secret-998877 &&
+      echo 'Nạp secret hoàn tất!'
+      "
+    networks:
+      - devsecops-network
+    depends_on:
+      - vault
+
+  # Node Client App: Ứng dụng mô phỏng kết nối lấy secret từ Vault
+  node-client:
+    image: node:18-alpine
+    container_name: devsecops-node-vault-client
+    volumes:
+      - ./src:/workspace
+    working_dir: /workspace
+    ports:
+      - "4000:4000"
+    environment:
+      - VAULT_ADDR=http://vault:8200
+      - VAULT_TOKEN=dev-root-token
+    command: sh -c "npm install && node app.js"
+    networks:
+      - devsecops-network
+    depends_on:
+      - vault-provisioner
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

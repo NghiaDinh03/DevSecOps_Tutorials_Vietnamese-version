@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # 1. Dịch vụ Cơ sở dữ liệu (Database Layer) - PostgreSQL
+  # ============================================================================
+  database:
+    image: postgres:15-alpine
+    container_name: devsecops-postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devsecops_pass
+      POSTGRES_DB: devsecops_db
+    # KHÔNG mở cổng ports ra máy host để đảm bảo cô lập hoàn toàn khỏi internet
+    volumes:
+      - devsecops-db-data:/var/lib/postgresql/data
+    networks:
+      - backend-net
+    # Giới hạn tài nguyên để chống tấn công DoS
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    # Tự kiểm tra sức khỏe cơ sở dữ liệu
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d devsecops_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # 2. Dịch vụ Backend API (Application Layer) - NodeJS REST API
+  # ============================================================================
+  backend:
+    image: node:20-alpine
+    container_name: devsecops-node-backend
+    working_dir: /app
+    environment:
+      DB_HOST: database
+      DB_PORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: devsecops_pass
+      DB_NAME: devsecops_db
+    volumes:
+      # Gắn mã nguồn backend đơn giản từ bên ngoài
+      - ./configs/backend.js:/app/backend.js
+    # Lệnh cài đặt thư viện kết nối pg trực tiếp và khởi chạy server
+    command: sh -c "npm install pg && node backend.js"
+    networks:
+      - frontend-net
+      - backend-net
+    depends_on:
+      database:
+        condition: service_healthy # Chỉ khởi động khi Database thực sự sẵn sàng nhận kết nối
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  # ============================================================================
+  # 3. Dịch vụ giao diện Frontend (Web Server Layer) - Nginx Reverse Proxy
+  # ============================================================================
+  frontend:
+    image: nginx:1.25-alpine
+    container_name: devsecops-nginx-frontend
+    ports:
+      - "8080:80" # Chỉ duy nhất cổng này mở ra ngoài máy host để người dùng truy cập
+    volumes:
+      # Gắn giao diện tĩnh và file cấu hình reverse proxy
+      - ./configs/index.html:/usr/share/nginx/html/index.html
+      - ./configs/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - frontend-net
+    depends_on:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+# Định nghĩa các Mạng ảo cô lập (Virtual Networks)
+networks:
+  frontend-net:
+    name: devsecops-frontend-network
+    driver: bridge
+  backend-net:
+    name: devsecops-backend-network
+    driver: bridge
+
+# Định nghĩa Ổ đĩa lưu trữ bền vững (Persistent Volumes)
+volumes:
+  devsecops-db-data:
+    name: devsecops-postgres-volume-data

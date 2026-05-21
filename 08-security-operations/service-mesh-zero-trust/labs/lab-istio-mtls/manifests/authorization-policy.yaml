@@ -1,0 +1,20 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-payment-from-frontend
+  namespace: prod
+spec:
+  selector:
+    matchLabels:
+      app: payment-service
+  # ALLOW: Chỉ cho phép các điều kiện khớp bên dưới được truy cập, chặn tất cả phần còn lại
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        # Định danh an toàn cấp bởi Istio CA (dạng SPIFFE ID) đại diện cho Frontend App
+        principals: ["cluster.local/ns/prod/sa/frontend-service-account"]
+    to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/pay"]

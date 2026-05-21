@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  devsecops-github-runner:
+    container_name: devsecops-github-runner
+    # Sử dụng image runner cộng đồng uy tín, hỗ trợ tự động cấu hình qua biến môi trường
+    image: myoung34/github-runner:2.312.0
+    restart: unless-stopped
+    networks:
+      - devsecops-network
+    environment:
+      # URL của kho chứa GitHub cá nhân của học viên
+      - RUNNER_REPOSITORY_URL=${GITHUB_REPO_URL}
+      # Token đăng ký runner lấy từ cấu hình repository
+      - RUNNER_TOKEN=${GITHUB_RUNNER_TOKEN}
+      - RUNNER_NAME=devsecops-local-runner
+      - RUNNER_LABELS=self-hosted,local-trivy
+      # Đảm bảo runner tự động hủy đăng ký khi container dừng
+      - EPHEMERAL=false
+    # Giới hạn tài nguyên để bảo vệ máy host (cgroups)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    # CẤM tuyệt đối không mount /var/run/docker.sock để tránh Container Breakout!
+    # Chúng ta quét mã nguồn trực tiếp bằng Trivy File System scan.
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

@@ -1,0 +1,80 @@
+pipeline {
+    // Chỉ định chạy Job này trên máy thực thi Agent chuyên dụng
+    agent {
+        label 'jenkins-agent'
+    }
+
+    environment {
+        // Trỏ địa chỉ của máy chủ SonarQube nội bộ
+        SONAR_SERVER_URL = "http://sonarqube:9000"
+        // Tên định danh dự án trên SonarQube
+        PROJECT_KEY = "devsecops-nodejs-app"
+    }
+
+    stages {
+        // Giai đoạn 1: Tải mã nguồn về Agent
+        stage('1. Checkout Source Code') {
+            steps {
+                echo '📥 Đang kéo mã nguồn từ kho lưu trữ...'
+                checkout scm
+            }
+        }
+
+        // Giai đoạn 2: Quét phân tích bảo mật mã nguồn tĩnh (SAST)
+        stage('2. Run SonarQube SAST Scan') {
+            steps {
+                echo '🔍 Đang thực hiện quét phân tích tĩnh bảo mật bằng SonarQube Scanner...'
+                // Sử dụng SonarScanner CLI được cấu hình sẵn để gửi mã nguồn lên server phân tích
+                withSonarQubeEnv('sonarqube-local-server') {
+                    sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=${PROJECT_KEY} \
+                        -Dsonar.projectName=${PROJECT_KEY} \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONAR_SERVER_URL} \
+                        -Dsonar.login=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
+
+        // Giai đoạn 3: Kiểm duyệt chất lượng an toàn (Quality Gate)
+        stage('3. Check SonarQube Quality Gate') {
+            steps {
+                echo '🚦 Đang kiểm tra cổng chất lượng an toàn bảo mật (Quality Gate)...'
+                // Tự động chờ kết quả phản hồi phân tích từ SonarQube Server
+                timeout(time: 5, unit: 'MINUTES') {
+                    script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "🔴 PIPELINE BỊ CHẶN: Phát hiện lỗ hổng bảo mật nghiêm trọng hoặc rò rỉ Secrets vượt quá ngưỡng Quality Gate!"
+                        } else {
+                            echo "🟢 QUALITY GATE ĐẠT CHUẨN: Mã nguồn an toàn, sẵn sàng đóng gói!"
+                        }
+                    }
+                }
+            }
+        }
+
+        // Giai đoạn 4: Đóng gói và chuẩn bị (Giả lập)
+        stage('4. Packaging & Artifact Registry') {
+            steps {
+                echo '📦 Đóng gói ứng dụng thành công và chuẩn bị lưu trữ...'
+            }
+        }
+    }
+
+    // Các tác vụ xử lý sau khi pipeline chạy xong
+    post {
+        always {
+            echo '🧹 Đang dọn dẹp không gian làm việc tạm thời trên Agent...'
+            cleanWs()
+        }
+        success {
+            echo '🎉 Chúc mừng! Pipeline hoàn thành an toàn và thành công 100%.'
+        }
+        failure {
+            echo '🚨 CẢNH BÁO: Pipeline thất bại! Vui lòng kiểm tra báo cáo lỗ hổng trên SonarQube Server (cổng 9000).'
+        }
+    }
+}

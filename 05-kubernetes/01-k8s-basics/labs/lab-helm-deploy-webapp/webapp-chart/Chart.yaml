@@ -1,0 +1,6 @@
+apiVersion: v2
+name: webapp-chart
+description: A Helm Chart to deploy a dynamic NodeJS web application with custom configs and health probes.
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

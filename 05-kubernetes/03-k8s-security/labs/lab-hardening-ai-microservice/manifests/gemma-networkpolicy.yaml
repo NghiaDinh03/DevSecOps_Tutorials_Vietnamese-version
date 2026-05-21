@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gemma-network-policy
+  namespace: gemma-secops
+spec:
+  podSelector:
+    matchLabels:
+      app: gemma-chat
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # 1. Chỉ cho phép các kết nối đi vào cổng 3000 từ các Pod giả lập client/frontend
+    - from:
+        - podSelector:
+            matchLabels:
+              role: client
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    # 2. Chỉ cho phép gọi ra DNS Server nội bộ để phân giải domain (Cổng 53 UDP/TCP)
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # 3. Chỉ cho phép gọi tới Ollama/Gemma Engine nội bộ ở cổng 11434
+    - to:
+        - podSelector:
+            matchLabels:
+              app: ollama
+      ports:
+        - protocol: TCP
+          port: 11434

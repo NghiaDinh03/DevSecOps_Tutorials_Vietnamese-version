@@ -1,0 +1,12 @@
+FROM alpine:3.18
+
+RUN apk add --no-cache curl
+
+# Cấu hình kiểm tra sức khỏe tự động
+HEALTHCHECK --interval=30s --timeout=5s \
+  CMD curl -f http://localhost/ || exit 1
+
+# Khai báo chạy dưới quyền user bảo mật non-root (UID 10001)
+USER 10001
+
+CMD ["sh", "-c", "echo 'Secure App is running!' && tail -f /dev/null"]

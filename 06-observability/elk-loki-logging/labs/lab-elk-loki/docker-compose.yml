@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  log-generator:
+    image: node:18-alpine
+    container_name: devsecops-log-generator
+    volumes:
+      - ./src:/workspace/src
+      - ./logs:/workspace/logs
+    working_dir: /workspace
+    command: node src/generate-logs.js
+    networks:
+      - devsecops-network
+
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: devsecops-loki
+    volumes:
+      - ./configs/loki-config.yml:/etc/loki/local-config.yaml:ro
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - devsecops-network
+
+  promtail:
+    image: grafana/promtail:2.8.2
+    container_name: devsecops-promtail
+    volumes:
+      - ./configs/promtail-config.yml:/etc/promtail/config.yml:ro
+      - ./logs:/workspace/logs:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - devsecops-network
+    depends_on:
+      - loki
+      - log-generator
+
+  grafana:
+    image: grafana/grafana-oss:10.0.3
+    container_name: devsecops-grafana-logging
+    ports:
+      - "3002:3000" # Cổng 3002 tránh trùng với lab Prometheus (3001)
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - devsecops-network
+    depends_on:
+      - loki
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Target App: Sử dụng phiên bản Nginx 1.16.0 lỗi thời (chứa nhiều CVEs thực tế để Trivy phát hiện)
+  web-target:
+    image: nginx:1.16.0-alpine
+    container_name: devsecops-web-target
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/usr/share/nginx/html:ro
+    networks:
+      - devsecops-network
+
+  # Security Runner: Chứa Trivy để thực hiện quét tĩnh và quét container
+  security-runner:
+    image: aquasec/trivy:0.43.1
+    container_name: devsecops-security-runner
+    entrypoint: ["sh", "-c", "tail -f /dev/null"]
+    volumes:
+      - .:/workspace
+      # Mount Docker socket để Trivy có thể quét các Image đang chạy trên máy Host
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - devsecops-network
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

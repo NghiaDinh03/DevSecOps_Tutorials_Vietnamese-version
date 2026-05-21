@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  node-app:
+    image: node:18-alpine
+    container_name: devsecops-node-app
+    volumes:
+      - ./src:/workspace
+    working_dir: /workspace
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && node app.js"
+    networks:
+      - devsecops-network
+
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: devsecops-prometheus
+    volumes:
+      - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - devsecops-network
+    depends_on:
+      - node-app
+
+  grafana:
+    image: grafana/grafana-oss:10.0.3
+    container_name: devsecops-grafana
+    ports:
+      - "3001:3000" # Đổi sang cổng 3001 ở máy host để tránh trùng nếu cổng 3000 đã bị chiếm
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Mật khẩu đăng nhập mặc định
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - devsecops-network
+    depends_on:
+      - prometheus
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

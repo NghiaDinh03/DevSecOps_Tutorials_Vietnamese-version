@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # 1. Jenkins Controller - Máy chủ điều phối trung tâm
+  jenkins-controller:
+    container_name: jenkins-controller
+    image: jenkins/jenkins:2.440.1-lts-alpine
+    restart: unless-stopped
+    ports:
+      - "8080:8080" # Cổng giao diện Web UI
+      - "50000:50000" # Cổng kết nối JNLP agent
+    networks:
+      - devsecops-jenkins-network
+    volumes:
+      - jenkins-data:/var/jenkins_home
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
+  # 2. Jenkins Agent - Máy thực thi công việc chuyên dụng
+  # Kết nối an toàn với Controller qua giao thức SSH
+  jenkins-agent:
+    container_name: jenkins-agent
+    image: jenkins/ssh-agent:5.24.0-alpine-jdk17
+    restart: unless-stopped
+    ports:
+      - "2222:22" # Port SSH
+    networks:
+      - devsecops-jenkins-network
+    environment:
+      # Khóa công khai SSH để Controller có thể login vào Agent
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/9mE6JbZ86wD0sF9vT6JtMhQj9aE/U5d76S3u9m9aZ devsecops-key
+    volumes:
+      - jenkins-agent-workspace:/home/jenkins/workspace
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
+  # 3. SonarQube Server - Máy chủ phân tích tĩnh bảo mật mã nguồn
+  sonarqube:
+    container_name: sonarqube
+    image: sonarqube:10.4.1-community
+    restart: unless-stopped
+    ports:
+      - "9000:9000" # Cổng Web UI của SonarQube
+    networks:
+      - devsecops-jenkins-network
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-logs:/opt/sonarqube/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 2048M # SonarQube chạy Elasticsearch nên cần tối thiểu 2GB RAM
+
+volumes:
+  jenkins-data:
+    name: devsecops-jenkins-data
+  jenkins-agent-workspace:
+    name: devsecops-jenkins-agent-workspace
+  sonarqube-data:
+    name: devsecops-sonarqube-data
+  sonarqube-extensions:
+    name: devsecops-sonarqube-extensions
+  sonarqube-logs:
+    name: devsecops-sonarqube-logs
+
+networks:
+  devsecops-jenkins-network:
+    name: devsecops-jenkins-network
+    driver: bridge

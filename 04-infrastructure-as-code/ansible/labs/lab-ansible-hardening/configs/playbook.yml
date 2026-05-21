@@ -1,0 +1,69 @@
+---
+- name: OS Security Hardening Playbook
+  hosts: webservers
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: 1. Kiểm tra thông tin hệ điều hành của Target Node
+      debug:
+        msg: "Đang gia cố bảo mật cho hệ thống {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: 2. Cập nhật chỉ mục gói (Package Index) và nâng cấp các gói hiện tại
+      apk:
+        update_cache: yes
+        upgrade: yes
+      when: ansible_os_family == "Alpine"
+
+    - name: 3. Cài đặt các gói tiện ích bảo mật cơ bản
+      apk:
+        name:
+          - curl
+          - openssl
+          - ca-certificates
+        state: present
+      when: ansible_os_family == "Alpine"
+
+    - name: 4. Giới hạn số lượng tiến trình tối đa để chống Fork Bomb (DoS Protection)
+      pam_limits:
+        domain: '*'
+        limit_type: '-'
+        limit_item: nproc
+        value: '100'
+
+    - name: 5. Gia cố cấu hình mạng an toàn qua Kernel parameters (sysctl)
+      sysctl:
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
+        sysctl_set: yes
+        state: present
+        reload: yes
+      with_items:
+        # Bật TCP SYN Cookies bảo vệ khỏi tấn công SYN Flood
+        - { key: 'net.ipv4.tcp_syncookies', value: '1' }
+        # Tắt chấp nhận các gói chuyển hướng (Redirects) tránh tấn công Man-in-the-Middle
+        - { key: 'net.ipv4.conf.all.accept_redirects', value: '0' }
+        # Tắt tính năng IP forwarding (Không làm router trung gian)
+        - { key: 'net.ipv4.ip_forward', value: '0' }
+      ignore_errors: yes # Bỏ qua nếu môi trường container ảo hóa không cho phép sửa sysctl máy host
+
+    - name: 6. Gia cố cấu hình SSH Daemon (SSHD Hardening)
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items:
+        # Cấm xác thực bằng mật khẩu plain-text (Chỉ cho dùng SSH Keys)
+        - { regexp: '^#?PasswordAuthentication', line: 'PasswordAuthentication no' }
+        # Tắt cổng X11 Forwarding tránh rò rỉ đồ họa
+        - { regexp: '^#?X11Forwarding', line: 'X11Forwarding no' }
+        # Thiết lập thời gian timeout tự động ngắt kết nối treo (Graceful Timeout)
+        - { regexp: '^#?ClientAliveInterval', line: 'ClientAliveInterval 300' }
+        - { regexp: '^#?ClientAliveCountMax', line: 'ClientAliveCountMax 0' }
+
+    - name: 7. Khởi động lại dịch vụ SSH Daemon để áp dụng cấu hình mới
+      service:
+        name: sshd
+        state: restarted
+      ignore_errors: yes

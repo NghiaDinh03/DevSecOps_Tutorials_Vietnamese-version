@@ -1,0 +1,46 @@
+# Agent Memory (AI coding assistant memory - local only)
+agent_memory/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+
+# Docker
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# Ansible
+*.retry

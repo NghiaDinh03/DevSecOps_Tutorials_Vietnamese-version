@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gemma-sa
+  namespace: gemma-secops
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gemma-role
+  namespace: gemma-secops
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gemma-rb
+  namespace: gemma-secops
+subjects:
+  - kind: ServiceAccount
+    name: gemma-sa
+    namespace: gemma-secops
+roleRef:
+  kind: Role
+  name: gemma-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,7 @@
+FROM alpine:3.18
+
+# Cài đặt một số gói tiện ích
+RUN apk add --no-cache curl
+
+# Chạy một ứng dụng giả lập đơn giản
+CMD ["sh", "-c", "echo 'Vulnerable App is running!' && tail -f /dev/null"]

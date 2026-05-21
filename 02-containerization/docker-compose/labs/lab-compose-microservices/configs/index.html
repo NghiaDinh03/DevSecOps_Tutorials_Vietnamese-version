@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevSecOps Microservices Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --success: #10b981;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-top: 0;
+      text-align: center;
+      background: linear-gradient(to right, #818cf8, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      margin-bottom: 20px;
+      text-align: center;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-family: inherit;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    .notes-list {
+      margin-top: 30px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .note-card {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .note-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 0 6px 0;
+    }
+
+    .note-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>DevSecOps Compose Lab</h1>
+    <div class="status-badge">● Mạng ảo Bridge cô lập đã kết nối</div>
+    
+    <form id="noteForm">
+      <div class="form-group">
+        <label for="noteInput">Nhập ghi chú của bạn để lưu vào Database:</label>
+        <input type="text" id="noteInput" placeholder="Ví dụ: Đã hiểu cơ chế cô lập mạng..." required autocomplete="off">
+      </div>
+      <button type="submit">Lưu ghi chú</button>
+    </form>
+
+    <div class="notes-list" id="notesList">
+      <p style="text-align: center; color: var(--text-muted);">Đang tải dữ liệu từ database...</p>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = '/api/notes';
+
+    // Hàm lấy danh sách ghi chú
+    async function fetchNotes() {
+      const listElement = document.getElementById('notesList');
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Không thể kết nối API');
+        const notes = await response.json();
+        
+        if (notes.length === 0) {
+          listElement.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Chưa có ghi chú nào trong Database.</p>';
+          return;
+        }
+
+        listElement.innerHTML = notes.map(note => `
+          <div class="note-card">
+            <p class="note-text">${escapeHtml(note.content)}</p>
+            <span class="note-time">${new Date(note.created_at).toLocaleString('vi-VN')}</span>
+          </div>
+        `).join('');
+      } catch (err) {
+        listElement.innerHTML = `<p style="text-align: center; color: #ef4444;">Lỗi kết nối tới Backend API!</p>`;
+      }
+    }
+
+    // Hàm chống tấn công XSS khi hiển thị dữ liệu người dùng nhập
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+
+    // Gửi ghi chú mới
+    document.getElementById('noteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('noteInput');
+      const content = input.value.trim();
+      
+      if (!content) return;
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ content })
+        });
+
+        if (response.ok) {
+          input.value = '';
+          fetchNotes();
+        } else {
+          alert('Lỗi ghi nhận dữ liệu!');
+        }
+      } catch (err) {
+        alert('Lỗi kết nối Backend API!');
+      }
+    });
+
+    // Khởi tạo tải trang
+    fetchNotes();
+  </script>
+</body>
+</html>

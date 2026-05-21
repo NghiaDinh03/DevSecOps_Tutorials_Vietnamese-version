@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemma-chat
+  namespace: gemma-secops
+  labels:
+    app: gemma-chat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gemma-chat
+  template:
+    metadata:
+      labels:
+        app: gemma-chat
+    spec:
+      serviceAccountName: gemma-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+        - name: gemma-chatbot
+          image: nghiadinh03/gemma-chatbot:v1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          # Gia cố bảo mật cho Container (CKS Hardening)
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          # Thiết lập giới hạn tài nguyên tránh tấn công DDOS làm sập Node (Resource Exhaustion)
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+          # Tiêm API Key an toàn dưới dạng file mount thay vì dùng biến môi trường trần
+          volumeMounts:
+            - name: secrets-volume
+              mountPath: "/etc/secrets"
+              readOnly: true
+            # Mount thư mục ghi tạm bằng bộ nhớ RAM để đảm bảo ứng dụng không lỗi khi root filesystem là Read-Only
+            - name: tmp-volume
+              mountPath: "/tmp"
+      volumes:
+        - name: secrets-volume
+          secret:
+            secretName: gemma-secret
+        - name: tmp-volume
+          emptyDir: {}

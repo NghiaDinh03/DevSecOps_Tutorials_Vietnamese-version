@@ -1,0 +1,52 @@
+# ==============================================================================
+# STAGE 1: Môi trường cài đặt dependencies (Builder Stage)
+# ==============================================================================
+FROM node:20-alpine AS builder
+
+# Thiết lập thư mục làm việc tạm thời
+WORKDIR /app
+
+# Sao chép các tệp định nghĩa thư viện
+COPY package*.json ./
+
+# Cài đặt toàn bộ dependencies bao gồm cả devDependencies để phục vụ cho build (nếu có)
+RUN npm ci
+
+# Sao chép mã nguồn ứng dụng sang
+COPY . .
+
+# Dọn dẹp devDependencies, chỉ giữ lại các thư viện cần thiết cho môi trường chạy (Production)
+RUN npm prune --production
+
+# ==============================================================================
+# STAGE 2: Môi trường chạy thực tế (Production Stage)
+# ==============================================================================
+FROM node:20-alpine
+
+# Cấu hình môi trường Node là production
+ENV NODE_ENV=production
+
+# Thiết lập thư mục làm việc của ứng dụng
+WORKDIR /app
+
+# Khởi tạo Group và User không đặc quyền (Non-root) để ngăn chặn container breakout
+# Chúng ta sử dụng ID 10001 để tránh xung đột với các tài khoản hệ thống thông thường
+RUN addgroup -g 10001 -S gemma-group && \
+    adduser -u 10001 -S gemma-user -G gemma-group
+
+# Sao chép các thư viện NodeJS cần thiết từ Stage Builder
+COPY --from=builder --chown=gemma-user:gemma-group /app/node_modules ./node_modules
+
+# Sao chép mã nguồn gốc từ Stage Builder
+COPY --from=builder --chown=gemma-user:gemma-group /app/package.json ./package.json
+COPY --from=builder --chown=gemma-user:gemma-group /app/server.js ./server.js
+COPY --from=builder --chown=gemma-user:gemma-group /app/public ./public
+
+# Chuyển quyền thực thi sang tài khoản không đặc quyền đã tạo
+USER 10001
+
+# Khai báo cổng lắng nghe của ứng dụng web
+EXPOSE 3000
+
+# Khởi chạy ứng dụng
+CMD ["node", "server.js"]

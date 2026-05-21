@@ -1,0 +1,11 @@
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: prod
+spec:
+  mtls:
+    # Chế độ mTLS: 
+    # - PERMISSIVE: Chấp nhận cả kết nối plain-text và mTLS (chế độ chuyển đổi)
+    # - STRICT: Chỉ chấp nhận các kết nối mTLS được mã hóa an toàn, chặn đứng HTTP plain-text
+    mode: PERMISSIVE

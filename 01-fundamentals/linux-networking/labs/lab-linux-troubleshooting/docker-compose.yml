@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # 1. Container máy khách thực hành (Client Container)
+  # ============================================================================
+  client:
+    image: alpine:3.18
+    container_name: devsecops-linux-client
+    # Khởi động container, cài đặt các công cụ mạng hệ thống và giữ tiến trình chạy ngầm
+    # Đồng thời sinh file log lỗi nhạy cảm phân quyền 600 chỉ cho root đọc ban đầu
+    command: >
+      sh -c "
+      apk add --no-cache curl bind-tools iproute2 net-tools busybox-extras &&
+      mkdir -p /var/log/app &&
+      echo 'API ERROR LOG [2026-05-21 22:00:15]: PostgreSQL connection pool exhausted!' > /var/log/app/error.log &&
+      chmod 600 /var/log/app/error.log &&
+      tail -f /dev/null
+      "
+    networks:
+      - devsecops-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+  # ============================================================================
+  # 2. Container máy chủ dịch vụ gặp sự cố (Web Server Container)
+  # ============================================================================
+  web-server:
+    image: nginx:1.25-alpine
+    container_name: devsecops-nginx-server
+    # Đổi cổng lắng nghe mặc định của Nginx từ 80 thành 8080 để giả lập lệch cổng kết nối
+    command: >
+      sh -c "
+      sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.conf &&
+      nginx -g 'daemon off;'
+      "
+    networks:
+      - devsecops-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+# Định nghĩa mạng ảo cô lập cho bài lab
+networks:
+  devsecops-net:
+    name: devsecops-troubleshooting-network
+    driver: bridge

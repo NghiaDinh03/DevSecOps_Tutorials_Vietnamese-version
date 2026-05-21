@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  ansible-controller:
+    image: alpine:3.18
+    container_name: devsecops-ansible-controller
+    volumes:
+      - ./configs:/workspace
+    working_dir: /workspace
+    command: >
+      sh -c "
+      apk add --no-cache ansible openssh-client python3-dev build-base &&
+      if [ ! -f /workspace/id_rsa ]; then
+        echo 'Generating SSH keypair...' &&
+        ssh-keygen -t rsa -b 2048 -N '' -f /workspace/id_rsa
+      fi &&
+      mkdir -p ~/.ssh &&
+      cp /workspace/id_rsa ~/.ssh/id_rsa &&
+      chmod 600 ~/.ssh/id_rsa &&
+      echo 'Ansible Controller is ready!' &&
+      tail -f /dev/null
+      "
+    networks:
+      - devsecops-network
+
+  target-node-01:
+    image: alpine:3.18
+    container_name: devsecops-target-node-01
+    volumes:
+      - ./configs:/workspace
+    command: >
+      sh -c "
+      apk add --no-cache openssh python3 &&
+      ssh-keygen -A &&
+      echo 'Waiting for shared SSH keys...' &&
+      until [ -f /workspace/id_rsa.pub ]; do sleep 1; done &&
+      mkdir -p /root/.ssh &&
+      cp /workspace/id_rsa.pub /root/.ssh/authorized_keys &&
+      chmod 700 /root/.ssh &&
+      chmod 600 /root/.ssh/authorized_keys &&
+      # Cho phép root login và tắt password authentication để an toàn
+      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
+      sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config &&
+      /usr/sbin/sshd -D
+      "
+    networks:
+      - devsecops-network
+    depends_on:
+      - ansible-controller
+
+  target-node-02:
+    image: alpine:3.18
+    container_name: devsecops-target-node-02
+    volumes:
+      - ./configs:/workspace
+    command: >
+      sh -c "
+      apk add --no-cache openssh python3 &&
+      ssh-keygen -A &&
+      echo 'Waiting for shared SSH keys...' &&
+      until [ -f /workspace/id_rsa.pub ]; do sleep 1; done &&
+      mkdir -p /root/.ssh &&
+      cp /workspace/id_rsa.pub /root/.ssh/authorized_keys &&
+      chmod 700 /root/.ssh &&
+      chmod 600 /root/.ssh/authorized_keys &&
+      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
+      sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config &&
+      /usr/sbin/sshd -D
+      "
+    networks:
+      - devsecops-network
+    depends_on:
+      - ansible-controller
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Microservice thanh toán nhạy cảm (Payment) chạy kèm Mock Envoy Sidecar
+  payment-service:
+    image: python:3.10-alpine
+    container_name: devsecops-payment-service
+    volumes:
+      - ./configs:/configs:ro
+      - ./manifests:/manifests:ro
+    # Chạy cả App Backend thực tế (cổng 8081) và Sidecar Proxy bảo vệ (cổng 8080)
+    command: sh -c "python /configs/app_payment.py & python /configs/sidecar.py"
+    networks:
+      - zero-trust-net
+
+  # Microservice Frontend giao diện người dùng
+  frontend-service:
+    image: python:3.10-alpine
+    container_name: devsecops-frontend-service
+    volumes:
+      - ./configs:/configs:ro
+    command: python /configs/app_frontend.py
+    ports:
+      - "3000:3000"
+    depends_on:
+      - payment-service
+    networks:
+      - zero-trust-net
+
+  # Container đóng vai trò hacker/kẻ tấn công hoặc một microservice khác không được phân quyền
+  bad-actor:
+    image: alpine:latest
+    container_name: devsecops-bad-actor
+    command: sh -c "apk add --no-cache curl && tail -f /dev/null"
+    depends_on:
+      - payment-service
+    networks:
+      - zero-trust-net
+
+networks:
+  zero-trust-net:
+    name: zero-trust-network
+    driver: bridge

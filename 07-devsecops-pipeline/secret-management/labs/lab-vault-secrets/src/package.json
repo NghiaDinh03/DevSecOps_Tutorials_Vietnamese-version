@@ -1,0 +1,10 @@
+{
+  "name": "devsecops-vault-client",
+  "version": "1.0.0",
+  "description": "Ứng dụng Node.js kết nối và lấy secret an toàn từ HashiCorp Vault",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,21 @@
+# Loại trừ thư mục dependencies cài đặt cục bộ trên máy host để tránh xung đột hệ điều hành
+node_modules
+
+# Loại trừ các file log rác sinh ra trong quá trình cài đặt npm
+npm-debug.log
+yarn-error.log
+
+# Loại trừ cấu hình môi trường chứa thông tin bảo mật nhạy cảm (secrets/keys)
+.env
+.env.local
+.env.development
+.env.production
+
+# Loại trừ mã nguồn quản lý Git và tài liệu hướng dẫn không cần thiết khi chạy ứng dụng
+.git
+.gitignore
+.github
+README.md
+LICENSE
+Dockerfile*
+docker-compose*

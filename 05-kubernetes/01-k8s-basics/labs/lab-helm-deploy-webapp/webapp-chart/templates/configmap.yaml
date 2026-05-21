@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  labels:
+    app: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+data:
+  APP_ENV: {{ .Values.appConfig.appEnv | quote }}
+  WELCOME_MSG: {{ .Values.appConfig.welcomeMsg | quote }}

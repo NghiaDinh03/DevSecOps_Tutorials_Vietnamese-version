@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Máy chủ MISP (Mock) siêu nhẹ phục vụ thực hành
+  misp-server:
+    image: python:3.10-alpine
+    container_name: devsecops-misp-server
+    volumes:
+      - ./configs:/workspace/configs
+    working_dir: /workspace
+    ports:
+      - "8082:8082"
+    command: python /workspace/configs/misp_mock.py
+    networks:
+      - devsecops-network
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

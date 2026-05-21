@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # Container lập lịch chạy tác vụ tự động (Cron Daemon Container)
+  # ============================================================================
+  cron-container:
+    image: alpine:3.18
+    container_name: devsecops-cron-automator
+    # Tạo sẵn các cấu trúc thư mục làm việc và kích hoạt dịch vụ Cron Daemon chạy ngầm
+    command: >
+      sh -c "
+      mkdir -p /app/data /app/scripts /app/backups &&
+      crond -f -l 8
+      "
+    volumes:
+      # Ánh xạ thư mục trực tiếp ra máy host để lập trình viên tự viết và quan sát file nén
+      - ./data:/app/data
+      - ./scripts:/app/scripts
+      - ./backups:/app/backups
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M

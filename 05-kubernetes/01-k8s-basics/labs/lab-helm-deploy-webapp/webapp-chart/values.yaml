@@ -1,0 +1,30 @@
+# Default values for webapp-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nghiadinh03/devops-webapp
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.0"
+
+service:
+  type: NodePort
+  port: 3000
+  nodePort: 30080
+
+appConfig:
+  appEnv: "development"
+  welcomeMsg: "Chào mừng các bạn đến với khóa học DevSecOps thực chiến!"
+
+probes:
+  liveness:
+    path: /health
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  readiness:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5

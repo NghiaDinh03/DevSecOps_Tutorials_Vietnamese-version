@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  terraform-cli:
+    image: hashicorp/terraform:1.5.7
+    container_name: devsecops-terraform-cli
+    volumes:
+      # Mount thư mục cấu hình terraform hiện tại vào container
+      - ./src:/workspace
+      # Mount Docker socket để Terraform tương tác trực tiếp với Docker Daemon trên máy host
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /workspace
+    entrypoint: ["sh", "-c", "tail -f /dev/null"]
+    networks:
+      - devsecops-network
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

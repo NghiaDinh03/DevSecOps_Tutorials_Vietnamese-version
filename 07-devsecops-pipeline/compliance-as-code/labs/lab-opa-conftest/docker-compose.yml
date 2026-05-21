@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Conftest Runner: Chứa môi trường Conftest CLI để thực hiện chạy test chính sách
+  conftest-runner:
+    image: openpolicyagent/conftest:v0.45.0
+    container_name: devsecops-conftest-runner
+    entrypoint: ["sh", "-c", "tail -f /dev/null"]
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    networks:
+      - devsecops-network
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge

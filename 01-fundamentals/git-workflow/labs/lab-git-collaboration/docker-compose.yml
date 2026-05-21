@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # Container giả lập môi trường cộng tác Git (Git Collaboration Container)
+  # ============================================================================
+  git-lab-container:
+    image: alpine:3.18
+    container_name: devsecops-git-collaboration
+    # Tạo các thư mục làm việc và kích hoạt dịch vụ chạy ngầm để giữ container
+    command: >
+      sh -c "
+      apk add --no-cache git &&
+      mkdir -p /app/central.git /app/john /app/alice &&
+      tail -f /dev/null
+      "
+    volumes:
+      # Ánh xạ thư mục workspace trực tiếp ra máy host để học viên có thể sửa file giải quyết conflict
+      - ./workspace:/app
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M

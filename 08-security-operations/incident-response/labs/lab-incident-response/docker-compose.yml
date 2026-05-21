@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Target Web App: Ứng dụng đích cần giám sát
+  web-app:
+    image: alpine:3.18
+    container_name: devsecops-runtime-web
+    volumes:
+      - ./app:/workspace/app
+    working_dir: /workspace/app
+    command: >
+      sh -c "
+      mkdir -p /workspace/app &&
+      echo '{\"database_url\": \"postgresql://prod-db:5432\", \"api_key\": \"secret-key-1122\"}' > /workspace/app/sensitive_config.json &&
+      echo 'Target application is running!' &&
+      tail -f /dev/null
+      "
+    networks:
+      - devsecops-network
+
+  # Mini-Falco Agent: Chạy song song và giám sát tiến trình/file của web-app
+  mini-falco:
+    image: python:3.10-alpine
+    container_name: devsecops-mini-falco
+    volumes:
+      - ./configs:/workspace/configs
+      - ./app:/workspace/app
+    working_dir: /workspace
+    pid: "service:web-app" # CHIA SẺ PID NAMESPACE: Cho phép Mini-Falco nhìn thấy mọi tiến trình inside web-app!
+    command: python /workspace/configs/mini-falco.py
+    depends_on:
+      - web-app
+    networks:
+      - devsecops-network
+
+networks:
+  devsecops-network:
+    name: devsecops-network
+    driver: bridge
