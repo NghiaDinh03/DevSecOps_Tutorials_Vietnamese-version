@@ -68,3 +68,26 @@ Module này được phân chia thành 3 sub-module thực tế:
 *   👉 **[Bước 1: Quét bảo mật mã nguồn & ứng dụng](./security-scanning/security-scanning-guide.md)** (SAST, DAST, SCA với Trivy).
 *   👉 **[Bước 2: Học quản lý bí mật nâng cao với Vault](./secret-management/secret-management-guide.md)**.
 *   👉 **[Bước 3: Thực thi chính sách hạ tầng an toàn với OPA Conftest](./compliance-as-code/compliance-as-code-guide.md)**.
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+Khám phá các bài blog thực tế và kinh nghiệm nâng cao để xây dựng và bảo vệ Pipeline CI/CD toàn diện:
+
+### 1. 🇻🇳 [Shift-Left Security: Đưa bảo mật vào Pipeline CI/CD như thế nào cho đúng?](https://viblo.asia/p/shift-left-security-dua-bao-mat-vao-pipeline-cicd-nhu-the-nao-cho-dung-RnB5p7vOlPG)
+*   **Nguồn**: Cộng đồng Viblo.asia / DevOps Việt Nam (Đạt 14k+ views, 180+ upvotes).
+*   **Giá trị thực tiễn**: Bài viết là cẩm nang hướng dẫn từng bước để hiện thực hóa triết lý "Bảo mật từ gốc" (*Shift-Left Security*). Tác giả giải thích chi tiết cách lồng ghép các công cụ quét tự động vào từng giai đoạn của Pipeline mà không làm nghẽn tiến độ của Dev:
+    *   Quét mã nguồn tĩnh (*SAST* - SonarQube) ngay khi commit để tìm lỗi logic.
+    *   Quét thư viện phụ thuộc (*SCA* - Trivy/Snyk) để chặn thư viện dính lỗ hổng bảo mật (*CVEs*).
+    *   Quét cấu hình hạ tầng (*Dockerfile/K8s linting* - Conftest/OPA) để ngăn chặn lỗi cấu hình sai (*misconfigurations*).
+    *   Quét Docker Image (*Container Scanning* - Trivy) trước khi đẩy lên Registry.
+    *   Chạy quét động (*DAST* - OWASP ZAP) trên môi trường Staging.
+*   **Lý do cần đọc**: Giúp bạn có cái nhìn toàn diện về cách tổ chức và thiết lập một hệ thống bảo mật tự động hóa đa lớp trong doanh nghiệp.
+
+### 2. 🇬🇧 [How to Secure Your Secrets in Git: A Gitleaks + HashiCorp Vault Guide (Cách Bảo Vệ Bí Mật Trong Git: Hướng Dẫn Sử Dụng Gitleaks + Vault)](https://blog.gitguardian.com/how-to-secure-your-secrets-in-git-a-gitleaks-hashicorp-vault-guide/)
+*   **Nguồn**: GitGuardian Blog / Medium (Bài viết đoạt giải thưởng về nội dung bảo mật chuỗi cung ứng).
+*   **Bản dịch & Tóm tắt cốt lõi**: Phân tích hiểm họa khôn lường của việc để lộ mật khẩu, API keys, certificates trên các kho chứa mã nguồn (*Git repositories*), kể cả trong repository nội bộ. Tác giả đề xuất giải pháp phòng thủ 2 lớp cực kỳ nghiêm ngặt:
+    1.  **Lớp 1 (Ngăn chặn từ máy Client)**: Hướng dẫn cài đặt Gitleaks kết hợp với Git hooks (`pre-commit`) để quét tự động toàn bộ mã nguồn cục bộ. Nếu phát hiện lập trình viên vô tình chèn API Key dạng plain-text, commit sẽ ngay lập tức bị chặn và từ chối.
+    2.  **Lớp 2 (Truyền khóa động lúc Runtime)**: Thay thế hoàn toàn mọi hardcoded secrets bằng cơ chế dynamic injection. Toàn bộ thông tin nhạy cảm được lưu trữ tập trung tại HashiCorp Vault. Khi ứng dụng khởi chạy (trong Docker/K8s), nó sẽ sử dụng Vault AppRole hoặc Token để gọi Vault API và tự động nạp dynamic credentials vào bộ nhớ đệm (*RAM*), bảo đảm secrets không bao giờ bị lưu trên ổ đĩa hay Git.
+

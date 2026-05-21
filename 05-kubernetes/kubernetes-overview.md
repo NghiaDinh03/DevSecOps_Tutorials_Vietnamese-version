@@ -93,3 +93,24 @@ Bạn đóng vai trò là một DevSecOps Engineer được giao nhiệm vụ tr
 *   **Nếu bạn chưa bao giờ dùng Kubernetes**: Hãy bắt đầu từ [01-k8s-basics](./01-k8s-basics/k8s-basics-guide.md) để học cách viết các file YAML deploy ứng dụng đơn giản trước.
 *   **Nếu bạn đã biết deploy app nhưng chưa biết setup hệ thống**: Hãy bắt đầu từ [02-k8s-administration](./02-k8s-administration/k8s-administration-guide.md) để hiểu sâu về cách vận hành một cụm cluster thực tế.
 *   **Nếu bạn đã thành thạo vận hành và muốn gia cố an toàn theo chuẩn bảo mật**: Hãy tiến thẳng tới [03-k8s-security](./03-k8s-security/k8s-security-guide.md) để làm quen với các công nghệ an ninh phòng thủ cao cấp nhất.
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+Nâng cao hiểu biết chuyên sâu và tiếp cận kinh nghiệm thực tế về mạng và bảo mật trong hệ sinh thái Kubernetes:
+
+### 1. 🇻🇳 [Tìm hiểu về Kubernetes Service và Kube-proxy: Dưới góc nhìn của gói tin](https://viblo.asia/p/tim-hieu-ve-kubernetes-service-va-kube-proxy-duoi-goc-nhin-cua-goi-tin-ByEZk6nxlQ0)
+*   **Nguồn**: Cộng đồng Viblo.asia (Đạt 15k+ views, 200+ upvotes).
+*   **Giá trị thực tiễn**: Bài viết đi sâu giải mã mô hình mạng phẳng đặc trưng của Kubernetes. Giải thích sự khác biệt cốt lõi giữa đối tượng trừu tượng *Service* (như ClusterIP, NodePort, LoadBalancer) và thành phần thực thi `kube-proxy` chạy dưới dạng DaemonSet trên mỗi node. Phân tích chi tiết cách `kube-proxy` cập nhật Endpoints từ API Server và lập trình lại `iptables` hoặc `IPVS` để định hướng gói tin đi thẳng tới Pod đích mà không cần đi qua một lớp proxy trung gian gây nghẽn cổ chai.
+*   **Lý do cần đọc**: Nắm vững luồng đi của gói tin giúp bạn tự tin xử lý các sự cố mất kết nối mạng nội bộ (*network troubleshooting*) phức tạp trong cluster.
+
+### 2. 🇬🇧 [Kubernetes Security Hardening based on CKS (Gia cố Bảo mật Kubernetes dựa trên Chuẩn Chứng chỉ CKS)](https://medium.com/cncf-vietnam/kubernetes-security-hardening-based-on-cks-52b8af9131)
+*   **Nguồn**: Medium / CNCF Blog (Được cộng đồng DevSecOps toàn cầu đánh giá là cẩm nang bỏ túi không thể thiếu).
+*   **Bản dịch & Tóm tắt cốt lõi**: Hướng dẫn checklist thực tiễn để bảo mật cụm Kubernetes theo tiêu chuẩn Certified Kubernetes Security Specialist (CKS) bao gồm 5 khía cạnh cốt lõi:
+    1.  **Gia cố API Server**: Vô hiệu hóa truy cập ẩn danh (*Anonymous Auth*), hạn chế IP truy cập bằng tường lửa, cấu hình kiểm tra admission controller chặt chẽ.
+    2.  **Kiểm soát Truy cập dựa trên Vai trò (RBAC)**: Tuân thủ nguyên tắc đặc quyền tối thiểu (*Least Privilege*), rà soát định kỳ các ClusterRole, RoleBinding để tránh bị lạm dụng quyền hạn.
+    3.  **Thiết lập Chính sách mạng (Network Policies)**: Áp dụng quy tắc mặc định cấm tất cả (*Default Deny-All*) cho cả chiều vào (*Ingress*) và chiều ra (*Egress*), chỉ mở các luồng giao tiếp được whitelist cụ thể giữa các dịch vụ microservices.
+    4.  **Thiết lập An toàn cho Pod (SecurityContext)**: Khai báo rõ cấu hình Pod/Container không chạy quyền root (`runAsNonRoot: true`), cấm leo thang đặc quyền (`allowPrivilegeEscalation: false`) và khóa hệ thống file ghi đè (`readOnlyRootFilesystem: true`).
+    5.  **Giám sát thời gian chạy (Runtime Security)**: Cài đặt và cấu hình Falco/Sysdig để phát hiện và cảnh báo tức thời khi có hành vi bất thường xảy ra trên hệ điều hành host hoặc container.
+

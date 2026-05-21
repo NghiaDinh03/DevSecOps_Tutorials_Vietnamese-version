@@ -52,3 +52,23 @@ Module này bao gồm 2 Sub-module lớn bám sát các công nghệ CI/CD hàng
 ### 2. Sub-module 02: [jenkins-gitlab-ci](jenkins-gitlab-ci/jenkins-gitlab-ci-guide.md) (Hệ thống CI/CD Jenkins & GitLab CI)
 *   **Lý thuyết chuyên sâu**: Kiến trúc Controller-Agent phân tán của Jenkins, Declarative Pipeline, kiến trúc GitLab Runner và phân tích chuyên sâu lỗ hổng leo thang đặc quyền của cơ chế chạy Docker-in-Docker (DinD) vs Docker Socket Binding (`/var/run/docker.sock`).
 *   🧪 **Thực hành Lab**: [Khởi dựng cụm Jenkins-SonarQube tự động phân tích tĩnh mã nguồn (SAST)](jenkins-gitlab-ci/labs/lab-jenkins-sast/lab-instructions.md).
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+Mở rộng kiến thức về CI/CD và cách bảo mật pipeline thông qua các bài viết kinh điển sau:
+
+### 1. 🇻🇳 [CI/CD: Từ Khái Niệm Đến Việc Xây Dựng Một Pipeline Thực Tế](https://viblo.asia/p/cicd-tu-khai-niem-den-viec-xay-dung-mot-pipeline-thuc-te-E375zWeElW7)
+*   **Nguồn**: Cộng đồng Viblo.asia (Đạt 20k+ views, 250+ upvotes).
+*   **Giá trị thực tiễn**: Bài viết hệ thống hóa đầy đủ định nghĩa của Continuous Integration, Continuous Delivery và Continuous Deployment. Tác giả chia sẻ kinh nghiệm thực tế về cách thiết kế một Pipeline chuẩn doanh nghiệp: từ phân chia môi trường (Dev -> Staging -> Production), thiết lập trigger tự động, quản lý cache để tối ưu hóa thời gian build, cho đến các phương án rollback nhanh chóng khi gặp lỗi.
+*   **Lý do cần đọc**: Cung cấp bức tranh toàn cảnh để bạn định hình tư duy thiết kế hệ thống trước khi bắt tay viết các file YAML cấu hình.
+
+### 2. 🇬🇧 [Hardening GitHub Actions Self-Hosted Runners: Best Practices (Gia cố Self-Hosted Runners của GitHub Actions)](https://www.cidersecurity.io/blog/security-of-github-actions-self-hosted-runners/)
+*   **Tác giả**: Chuyên gia bảo mật chuỗi cung ứng tại Cider Security (nay thuộc Palo Alto Networks).
+*   **Bản dịch & Tóm tắt cốt lõi**: Bài nghiên cứu chuyên sâu chỉ ra rằng việc sử dụng Self-hosted Runner mặc định chứa đựng rủi ro **thực thi mã từ xa (RCE)** cực kỳ nguy hiểm. Kẻ tấn công có thể lợi dụng Pull Request từ bên ngoài để chạy code độc hại ngay trên server Runner của bạn. Tác giả đề xuất các biện pháp phòng thủ nghiêm ngặt:
+    1.  **Chặn PR từ Fork**: Không bao giờ tự động chạy workflows đối với các Pull Request từ repo phân nhánh ngoại trừ khi có sự phê duyệt thủ công.
+    2.  **Sử dụng Ephemeral Runners**: Cấu hình runner chỉ chạy duy nhất 1 job rồi tự hủy (One-time runner), sau đó sinh mới từ image sạch để tránh tình trạng lưu trữ đệm (caching) mã độc.
+    3.  **Hạn chế Network Access**: Cô lập Runner trong mạng riêng (VPC), chỉ cho phép kết nối internet outbound tới các địa chỉ whitelist cụ thể (như Github API, Packages Registry), cấm giao tiếp với mạng nội bộ công ty.
+    4.  **Chạy user non-privileged**: Tuyệt đối không cho tiến trình runner chạy dưới quyền administrator/root của hệ điều hành host.
+

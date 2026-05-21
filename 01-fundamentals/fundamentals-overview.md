@@ -45,3 +45,28 @@ Bạn sẽ được dẫn dắt qua 3 Sub-module lớn từ lý thuyết sâu đ
 ### 3. Sub-module 03: [git-workflow](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/git-workflow/git-workflow-guide.md) (Quản lý mã nguồn & Gitflow bảo mật)
 *   **Lý thuyết chuyên sâu**: Cơ chế lưu trữ nội bộ của Git (Git Internals - Blobs, Trees, Commits), xác thực an toàn bằng SSH Keys, chiến lược phân nhánh bảo mật (Gitflow branching strategy) và ký số Commit bằng GPG.
 *   🧪 **Thực hành Lab**: [Giả lập quy trình làm việc nhóm & Xử lý xung đột mã nguồn (Git Collaboration & Conflict Resolution)](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/01-fundamentals/git-workflow/labs/lab-git-collaboration/lab-instructions.md).
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+Để mở rộng thế giới quan và học hỏi kinh nghiệm thực chiến từ các chuyên gia DevOps hàng đầu, dưới đây là các bài blog kinh điển đạt hàng ngàn lượt tương tác và đánh giá cao:
+
+### 1. 🇻🇳 [Git Internals: Dưới Lớp Vỏ Bọc Của Git](https://viblo.asia/p/git-internals-duoi-lop-vo-boc-cua-git-RnB5p7vOlPG)
+*   **Nguồn**: Cộng đồng Viblo.asia (Đạt 15k+ views, 200+ upvotes).
+*   **Giá trị thực tiễn**: Bài viết đi sâu giải mã cơ chế tổ chức file của Git trong thư mục ẩn `.git/objects`. Tác giả giải thích trực quan cách Git lưu trữ dữ liệu dưới dạng các con trỏ băm SHA-1 thông qua 3 đối tượng cốt lõi: **Blobs** (lưu nội dung file), **Trees** (tổ chức cấu trúc thư mục) và **Commits** (ghi nhận lịch sử phiên bản). Đọc bài này giúp bạn hiểu tại sao Git lại nhanh, an toàn và "không bao giờ thực sự xóa dữ liệu của bạn".
+
+### 2. 🇬🇧 [Linux Performance Analysis in 60 Seconds (Phân tích Hiệu năng Linux trong 60 Giây)](https://netflixtechblog.com/linux-performance-analysis-in-60-seconds-34d0ed0fa688)
+*   **Tác giả**: Brendan Gregg (Senior Performance Architect tại Netflix & tác giả sách Systems Performance nổi tiếng).
+*   **Bản dịch & Tóm tắt cốt lõi**: Bài viết kinh điển này hướng dẫn 10 câu lệnh Linux cơ bản nhưng cực kỳ mạnh mẽ để chuẩn đoán 90% các sự cố về CPU, RAM, Disk I/O và Network trên server chỉ trong vòng 1 phút đầu tiên:
+    1.  `uptime`: Xem tải trọng hệ thống (Load Average) trong 1, 5 và 15 phút.
+    2.  `dmesg | tail`: Đọc logs nhân kernel để phát hiện lỗi phần cứng, oom-killer (hệ thống tự động kill process ngốn RAM).
+    3.  `vmstat 1`: Giám sát bộ nhớ ảo, số tiến trình chờ chạy (r) và I/O block (b) theo mỗi giây.
+    4.  `mpstat -P ALL 1`: Phân tích tải trọng chi tiết trên từng nhân CPU để xem có bị mất cân bằng tải hay không.
+    5.  `pidstat 1`: Xác định chính xác tiến trình (PID) nào đang ngốn tài nguyên CPU nhất.
+    6.  `iostat -xz 1`: Xem chi tiết tốc độ đọc/ghi (r/w/s) và độ trễ phản hồi của ổ cứng.
+    7.  `free -m`: Kiểm tra dung lượng RAM thực tế đang dùng, trống và bộ đệm (buffers/cache).
+    8.  `sar -n DEV 1`: Giám sát lưu lượng mạng (gửi/nhận gói tin) trên các card mạng trong thời gian thực.
+    9.  `sar -n TCP,ETCP 1`: Phân tích số lượng kết nối TCP mới, kết nối bị lỗi hoặc bị reset.
+    10. `top`: Cái nhìn tổng quan thời gian thực về hoạt động của toàn bộ hệ thống.
+*   **Tại sao nên đọc?** Giúp rèn luyện tư duy phản ứng nhanh khi máy chủ Linux gặp sự cố, tránh việc gõ lệnh vô định.

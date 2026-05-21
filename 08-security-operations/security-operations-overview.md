@@ -67,3 +67,25 @@ Module này được phân chia thành 3 sub-module chuyên sâu:
 *   👉 **[Bước 1: Giám sát Runtime với Falco](./incident-response/incident-response-guide.md)**.
 *   👉 **[Bước 2: Tìm hiểu Threat Intelligence với MISP](./threat-intelligence/threat-intelligence-guide.md)**.
 *   👉 **[Bước 3: Xây dựng mạng Zero Trust với Istio mTLS](./service-mesh-zero-trust/service-mesh-zero-trust-guide.md)**.
+
+---
+
+## 📚 Tài nguyên Đọc thêm Chất lượng cao (Recommended Blog Readings)
+
+Khám phá các bài viết thực tế sâu sắc để nâng tầm tư duy an ninh phòng thủ và vận hành an toàn hệ thống (SecOps):
+
+### 1. 🇻🇳 [Bảo mật Zero-Trust trong Microservices với Service Mesh Istio](https://viblo.asia/p/bao-mat-zero-trust-trong-microservices-voi-service-mesh-istio-RnB5p7vOlPG)
+*   **Nguồn**: Cộng đồng Viblo.asia (Đạt 11k+ views, 160+ upvotes).
+*   **Giá trị thực tiễn**: Tác giả giải thích cặn kẽ triết lý an ninh tối tân **Zero-Trust**: *"Không bao giờ tin tưởng, luôn luôn xác minh"* (*Never Trust, Always Verify*). Bài viết chỉ rõ các điểm yếu chết người của mô hình bảo mật vành đai truyền thống (chỉ bảo vệ rìa hệ thống bằng Firewall) và cách Istio giải quyết triệt để thông qua cơ chế chèn Sidecar Envoy Proxy:
+    *   Tự động mã hóa song phương đầu cuối (*mTLS STRICT*) toàn bộ traffic giao tiếp chéo giữa các Pod để chống nghe trộm dữ liệu.
+    *   Thực thi chính sách xác thực thực thể (*PeerAuthentication*) nghiêm ngặt.
+    *   Quản lý phân quyền truy cập chi tiết đến từng API Endpoint và Method nhờ chính sách ủy quyền (*AuthorizationPolicy*).
+*   **Lý do cần đọc**: Cung cấp kiến thức nền tảng thực tế để thiết kế kiến trúc mạng an toàn tuyệt đối cho các hệ thống microservices phức tạp chạy trên cloud.
+
+### 2. 🇬🇧 [Kubernetes Runtime Security with Falco (Giám Sát An Ninh Runtime Trong Kubernetes Bằng Falco)](https://sysdig.com/blog/kubernetes-runtime-security-falco/)
+*   **Nguồn**: Sysdig Engineering Blog / CNCF Blog (Bài viết kinh điển khai mở kỷ nguyên eBPF Runtime Security).
+*   **Bản dịch & Tóm tắt cốt lõi**: Khi các biện pháp bảo mật tĩnh (SAST, SCA, Image Scanning) đã hoàn thành lúc build/ship, Falco chính là lớp lá chắn phòng thủ cuối cùng lúc ứng dụng đang chạy (*Runtime*). Bài viết giải mã cơ chế vận hành cấp thấp của Falco:
+    1.  **Lắng nghe System Calls**: Falco sử dụng driver kernel hoặc công nghệ **eBPF** siêu nhẹ để bắt và giám sát toàn bộ các lời gọi hệ thống (*system calls*) từ container gửi lên nhân CPU của host.
+    2.  **Bộ quy tắc mạnh mẽ (Rules Engine)**: So khớp thời gian thực các system calls đó với bộ quy tắc bảo mật được định nghĩa sẵn.
+    3.  **Phát hiện và Cảnh báo tức thì**: Hướng dẫn viết các rule tùy chỉnh để phát hiện các hành vi xâm nhập nguy hại như: Chạy một shell tương tác (*interactive shell*) bên trong container đang chạy production, sửa đổi file cấu hình trong thư mục hệ thống nhạy cảm (`/bin`, `/etc/shadow`), hoặc container thực hiện các kết nối mạng outbound bất thường ra ngoài internet.
+
