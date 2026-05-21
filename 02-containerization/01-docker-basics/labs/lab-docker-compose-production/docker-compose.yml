@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'     # Giới hạn tối đa 50% của 1 core CPU
+          memory: 256M     # Giới hạn tối đa 256MB RAM
+    networks:
+      - frontend-net
+      - backend-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"    # Tối đa 10MB cho mỗi file log
+        max-file: "3"      # Giữ tối đa 3 file log tránh tràn ổ đĩa
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_PASSWORD=secureproductionpwd
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'      # Giới hạn tối đa 1 core CPU
+          memory: 512M     # Giới hạn tối đa 512MB RAM
+    networks:
+      - backend-net        # Cơ sở dữ liệu hoàn toàn cô lập khỏi Internet bên ngoài
+
+networks:
+  frontend-net:
+  backend-net:
+    internal: true         # Mạng nội bộ hoàn toàn khép kín, cấm kết nối ra internet bên ngoài

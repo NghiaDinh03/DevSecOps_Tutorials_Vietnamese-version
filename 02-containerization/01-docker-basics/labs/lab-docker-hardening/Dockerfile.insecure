@@ -1,0 +1,7 @@
+FROM node:18
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 3000
+# Lỗi bảo mật: Chạy mặc định dưới quyền ROOT và chứa đầy đủ shell (sh, bash) và trình biên dịch dư thừa!
+CMD ["node", "server.js"]

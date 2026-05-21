@@ -80,10 +80,10 @@ Tất cả container chia sẻ chung nhân hệ điều hành của máy host (S
 
 ## 📚 Danh sách tài liệu chi tiết
 
-*   📖 **Lý thuyết Sub-module 01**: [Docker Basics & Image Hardening](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/02-containerization/01-docker-basics/docker-basics-guide.md)
-    *   🧪 *Thực hành Lab 01*: [Dockerize ứng dụng AI Chatbot Gemma an toàn](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/02-containerization/01-docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md)
-*   📖 **Lý thuyết Sub-module 02**: [Docker Compose & Đa Container](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/02-containerization/02-docker-compose/docker-compose-guide.md)
-    *   🧪 *Thực hành Lab 02*: [Dựng cụm Microservices local bằng Docker Compose](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/02-containerization/02-docker-compose/labs/lab-compose-microservices/lab-instructions.md)
+*   📖 **Lý thuyết Sub-module 01**: [Docker Basics & Image Hardening](./01-docker-basics/docker-basics-guide.md)
+    *   🧪 *Thực hành Lab 01*: [Đóng gói & Gia cố Bảo mật Ứng dụng Web Chatbot](./01-docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md)
+*   📖 **Lý thuyết Sub-module 02**: [Docker Compose & Đa Container](./02-docker-compose/docker-compose-guide.md)
+    *   🧪 *Thực hành Lab 02*: [Dựng cụm Microservices local bằng Docker Compose](./02-docker-compose/labs/lab-compose-microservices/lab-instructions.md)
 
 ---
 

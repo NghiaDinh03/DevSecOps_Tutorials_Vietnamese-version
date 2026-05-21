@@ -1,0 +1,12 @@
+{
+  "name": "docker-hardening-demo",
+  "version": "1.0.0",
+  "description": "Lab thực hành Docker Hardening chuyên nghiệp",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

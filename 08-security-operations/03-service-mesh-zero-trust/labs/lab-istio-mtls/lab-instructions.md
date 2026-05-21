@@ -57,7 +57,7 @@ docker-compose up -d
 
 ### Bước 3: Thiết lập STRICT mTLS để bảo vệ hạ tầng mạng
 Mục tiêu là chặn đứng toàn bộ các cuộc gọi không mã hóa plain-text đi vào microservice Payment.
-1. Mở file [peer-authentication.yaml](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/08-security-operations/03-service-mesh-zero-trust/labs/lab-istio-mtls/manifests/peer-authentication.yaml) trên trình soạn thảo.
+1. Mở file [peer-authentication.yaml](./manifests/peer-authentication.yaml) trên trình soạn thảo.
 2. Sửa giá trị của cấu hình `mode` từ `PERMISSIVE` thành `STRICT`:
 ```yaml
 spec:

@@ -59,10 +59,10 @@ Module này được phân chia thành 3 sub-module tương ứng với 3 cấp 
 
 ## 💡 Thiết kế Lab Thực Chiến Nâng cao: Hardening AI Microservice
 
-Để áp dụng các kiến thức bảo mật Kubernetes cao cấp nhất (CKS), chúng ta sẽ thực hành trực tiếp trên ứng dụng đích là **App AI Chat Gemma** sẵn có trong thư mục `/VSC/gemma-chat`.
+Để áp dụng các kiến thức bảo mật Kubernetes cao cấp nhất (CKS), chúng ta sẽ thực hành trực tiếp trên ứng dụng đích là **App AI Chatbot** (sử dụng Docker image công khai `nghiadinh03/gemma-chatbot:v1.0.0` trên Docker Hub).
 
 > [!IMPORTANT]
-> **Cam kết an toàn**: Chúng ta KHÔNG tạo bất kỳ file nào hay thay đổi mã nguồn của `/VSC/gemma-chat`. Toàn bộ tài liệu lab và manifests cấu hình sẽ được lưu trữ cục bộ trong thư mục:
+> **Cam kết an toàn**: Bài lab này hoàn toàn khép kín và an toàn. Toàn bộ tài liệu lab và manifests cấu hình sẽ được lưu trữ hoàn chỉnh tại thư mục cục bộ của dự án:
 > `05-kubernetes/03-k8s-security/labs/lab-hardening-ai-microservice/`
 
 ### Kịch bản Lab thực tế:

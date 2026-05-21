@@ -1,0 +1,21 @@
+# Giai đoạn 1: Build & Cài đặt thư viện dependencies
+FROM node:18-alpine AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+# Cài đặt tối giản các dependencies cho Production (bỏ devDependencies)
+RUN npm ci --only=production
+COPY . .
+
+# Giai đoạn 2: Môi trường chạy Runtime siêu sạch, siêu nhẹ
+# Sử dụng Distroless Image của Google - chỉ chứa duy nhất Node.js runtime, không chứa Shell (sh/bash) hay OS Package Manager!
+FROM gcr.io/distroless/nodejs18-debian11
+WORKDIR /app
+
+# Sao chép các tệp kết quả từ Giai đoạn 1 sang
+COPY --from=builder /usr/src/app /app
+
+# Khai báo chạy dưới quyền User Non-root mặc định của Distroless Node.js (UID 1000)
+USER 1000
+
+EXPOSE 3000
+CMD ["server.js"]

@@ -1,0 +1,12 @@
+{
+  "name": "gemma-chat-mock",
+  "version": "1.0.0",
+  "description": "Mock Gemma Chat App for Security Hardening Lab",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

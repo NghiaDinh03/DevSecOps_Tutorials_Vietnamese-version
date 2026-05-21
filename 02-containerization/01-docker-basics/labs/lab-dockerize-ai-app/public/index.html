@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemma AI Chatbot - Secured Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px rgba(255, 255, 255, 0.1) solid;
+        }
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #00e676;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px rgba(255, 255, 255, 0.05) solid;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .message {
+            margin: 8px 0;
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .user-msg {
+            background-color: #00b0ff;
+            color: #000;
+            font-weight: 500;
+            margin-left: auto;
+            border-bottom-right-radius: 2px;
+        }
+        .ai-msg {
+            background-color: #263238;
+            border-bottom-left-radius: 2px;
+            border: 1px rgba(255, 255, 255, 0.05) solid;
+        }
+        .input-group {
+            display: flex;
+            gap: 8px;
+        }
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 1px rgba(255, 255, 255, 0.1) solid;
+            border-radius: 8px;
+            outline: none;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            transition: all 0.3s;
+        }
+        input:focus {
+            border-color: #00e676;
+            box-shadow: 0 0 8px rgba(0, 230, 118, 0.2);
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #00e676;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background-color: #00c853;
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>🤖 Gemma Chatbot (Secured)</h2>
+        <div class="chat-box" id="chatBox">
+            <div class="message ai-msg">Hệ thống container đã khởi động an toàn! Hãy thử chat với tôi nào.</div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Nhập tin nhắn..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Gửi</button>
+        </div>
+    </div>
+
+    <script>
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            appendMessage(message, 'user-msg');
+            input.value = '';
+
+            try {
+                const response = await fetch(`/api/chat?message=${encodeURIComponent(message)}`);
+                const data = await response.json();
+                appendMessage(data.response, 'ai-msg');
+            } catch (err) {
+                appendMessage('Lỗi kết nối API bảo mật!', 'ai-msg');
+            }
+        }
+        function appendMessage(text, className) {
+            const chatBox = document.getElementById('chatBox');
+            const msgNode = document.createElement('div');
+            msgNode.className = `message ${className}`;
+            msgNode.innerText = text;
+            chatBox.appendChild(msgNode);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

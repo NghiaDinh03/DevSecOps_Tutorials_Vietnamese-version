@@ -5,7 +5,7 @@
 ---
 
 ## 🔗 Tài nguyên học tập bổ trợ (Recommended Learning Paths)
-*   ➡️ **Kiến trúc chi tiết & Hệ thống câu lệnh Docker**: [docker-components-commands.md](file:///e:/VSC/DevSecOps_Tutorials_Vietnamese-version/02-containerization/01-docker-basics/docker-components-commands.md) — *Đọc tệp này đầu tiên để làm quen với các thành phần dockerd, CLI và bảng tra cứu câu lệnh đầy đủ.*
+*   ➡️ **Kiến trúc chi tiết & Hệ thống câu lệnh Docker**: [docker-components-commands.md](./docker-components-commands.md) — *Đọc tệp này đầu tiên để làm quen với các thành phần dockerd, CLI và bảng tra cứu câu lệnh đầy đủ.*
 
 ---
 

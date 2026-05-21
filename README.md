@@ -166,53 +166,22 @@ Giáo trình được chia làm 8 Module chính từ cơ bản (Beginner) lên n
 
 ---
 
-## 🧪 Bản đồ Lab Thực Chiến Toàn Diện
+## 🧪 Hệ Thống Lab Thực Chiến Đa Cấp Độ (Easy - Medium - Hard)
 
-Mỗi Sub-module trong lộ trình bắt buộc có **tối thiểu 1 bài thực hành thực tiễn (Lab)** được cấu hình và chạy ổn định 100% bằng Docker Compose hoặc Kubernetes cục bộ. 
+Dự án áp dụng triết lý học qua hành (**Hands-on Learning**). Để đáp ứng năng lực của mọi học viên, chúng tôi thiết kế và đóng gói **24 bài thực hành thực tế** bám sát 100% các công nghệ tiêu chuẩn của ngành, được phân rã một cách khoa học trực tiếp bên trong từng thư mục bài học tương ứng dưới dạng các tệp tin hướng dẫn modular độc lập.
 
-### 💡 Các bài Lab được tổ chức theo hai mô hình:
-1.  **Standalone Labs (Lab Độc lập)**: Tự động khởi dựng toàn bộ môi trường và ứng dụng đích giả lập (NodeJS, Python, Go, Postgres, Nginx...) bằng Docker Compose hoặc Kubernetes cục bộ. Hoạt động độc lập và khép kín.
-2.  **Non-invasive Labs (Lab Liên kết)**: Sử dụng các dự án mã nguồn mở có sẵn của bạn trong thư mục `/VSC/` (như `gemma-chat`, `nghiadinh-portfolio`, `TheHive`) làm đối tượng để quét bảo mật hoặc deploy, **tuyệt đối không can thiệp hay chỉnh sửa bất kỳ dòng code nào** của các dự án này.
+Học viên có thể linh hoạt lựa chọn tùy chọn Lab phù hợp với trình độ của mình và nhấp trực tiếp vào liên kết bên dưới để bắt đầu thực hành ngay lập tức:
 
----
-
-### 🗺️ Bản đồ phân bổ Lab chi tiết:
-
-#### MODULE 1 — NỀN TẢNG DEVOPS
-*   **linux-networking**: [`lab-linux-troubleshooting`](./01-fundamentals/01-linux-networking/labs/lab-linux-troubleshooting/lab-instructions.md) — Thực hành khắc phục sự cố mạng ảo, định tuyến, phân quyền tệp tin và firewall.
-*   **scripting-automation**: [`lab-auto-backup-script`](./01-fundamentals/02-scripting-automation/labs/lab-auto-backup-script/lab-instructions.md) — Sao lưu dữ liệu nén, mã hóa và lập lịch cronjob tự động hóa quản trị hệ thống.
-*   **git-workflow**: [`lab-git-collaboration`](./01-fundamentals/03-git-workflow/labs/lab-git-collaboration/lab-instructions.md) — Thực hành kỹ năng giải quyết xung đột mã nguồn (Conflict Resolution) khi làm việc nhóm lớn.
-
-#### MODULE 2 — CÔNG NGHỆ CONTAINER
-*   **docker-basics**: [`lab-dockerize-ai-app`](./02-containerization/01-docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md) — Dockerize tối ưu và bảo mật ứng dụng AI Chatbot Gemma (`/VSC/gemma-chat`). *(Liên kết ngoài)*
-*   **docker-compose**: [`lab-compose-microservices`](./02-containerization/02-docker-compose/labs/lab-compose-microservices/lab-instructions.md) — Dựng cụm Microservices 3 lớp gồm Frontend tĩnh, Backend API và Database PostgreSQL.
-
-#### MODULE 3 — TỰ ĐỘNG HÓA CI/CD
-*   **github-actions**: [`lab-github-actions-runner`](./03-cicd-automation/01-github-actions/labs/lab-github-actions-runner/lab-instructions.md) — Tự dựng Containerized Self-hosted Runner cục bộ chạy quét an toàn mã nguồn bằng Trivy (SCA).
-*   **jenkins-gitlab-ci**: [`lab-jenkins-sast`](./03-cicd-automation/02-jenkins-gitlab-ci/labs/lab-jenkins-sast/lab-instructions.md) — Khởi dựng cụm phân tán Jenkins-SonarQube quét an toàn tĩnh mã nguồn (SAST) tự động chặn Quality Gate.
-
-#### MODULE 4 — HẠ TẦNG DẠNG CODE (IaC)
-*   **terraform**: [`lab-terraform-local`](./04-infrastructure-as-code/01-terraform/labs/lab-terraform-local/lab-instructions.md) — Khởi tạo tài nguyên hệ thống cục bộ thông qua Docker Socket.
-*   **ansible**: [`lab-ansible-hardening`](./04-infrastructure-as-code/02-ansible/labs/lab-ansible-hardening/lab-instructions.md) — Playbook tự động gia cố bảo mật (hardening) hệ điều hành an toàn.
-
-#### MODULE 5 — HỆ SINH THÁI KUBERNETES
-*   **01-k8s-basics**: [`lab-helm-deploy-webapp`](./05-kubernetes/01-k8s-basics/labs/lab-helm-deploy-webapp/lab-instructions.md) — Đóng gói ứng dụng dạng Helm Chart và triển khai lên cụm Kubernetes cục bộ (k3d/kind).
-*   **02-k8s-administration**: [`lab-k8s-etcd-backup`](./05-kubernetes/02-k8s-administration/labs/lab-k8s-etcd-backup/lab-instructions.md) — Thực hiện sao lưu và khôi phục database ETCD của cluster Kubernetes an toàn.
-*   **03-k8s-security**: [`lab-hardening-ai-microservice`](./05-kubernetes/03-k8s-security/labs/lab-hardening-ai-microservice/lab-instructions.md) — Thiết lập Network Policies, RBAC tối thiểu và Pod Security Context cho chatbot Gemma (`/VSC/gemma-chat`). *(Liên kết ngoài)*
-
-#### MODULE 6 — GIÁM SÁT & TRỰC QUAN HÓA
-*   **prometheus-grafana**: [`lab-prometheus-grafana`](./06-observability/01-prometheus-grafana/labs/lab-prometheus-grafana/lab-instructions.md) — Giám sát hiệu năng hệ thống microservices và tự động gửi cảnh báo qua Alertmanager.
-*   **elk-loki-logging**: [`lab-elk-loki`](./06-observability/02-elk-loki-logging/labs/lab-elk-loki/lab-instructions.md) — Thu thập, lọc và truy vấn log tập trung từ các containers bằng Grafana Loki & Promtail.
-
-#### MODULE 7 — TÍCH HỢP BẢO MẬT CI/CD (DEVSECOPS PIPELINE)
-*   **security-scanning**: [`lab-pipeline-security`](./07-devsecops-pipeline/01-security-scanning/labs/lab-pipeline-security/lab-instructions.md) — Quét an toàn mã nguồn tĩnh (SAST), phân tích thành phần phụ thuộc (SCA) tự động chặn lỗ hổng nghiêm trọng ở pipeline.
-*   **secret-management**: [`lab-vault-secrets`](./07-devsecops-pipeline/02-secret-management/labs/lab-vault-secrets/lab-instructions.md) — Lưu trữ và truy xuất dynamic credentials an toàn từ HashiCorp Vault.
-*   **compliance-as-code**: [`lab-opa-conftest`](./07-devsecops-pipeline/03-compliance-as-code/labs/lab-opa-conftest/lab-instructions.md) — Kiểm tra và cưỡng chế tuân thủ chính sách bảo mật hạ tầng Docker/Kubernetes bằng Rego (Conftest).
-
-#### MODULE 8 — VẬN HÀNH & AN NINH PHÒNG THỦ
-*   **incident-response**: [`lab-incident-response`](./08-security-operations/01-incident-response/labs/lab-incident-response/lab-instructions.md) — Giám sát an ninh Runtime thời gian thực bằng Mini-Falco và cơ chế chia sẻ PID Namespace.
-*   **threat-intelligence**: [`lab-misp-intel`](./08-security-operations/02-threat-intelligence/labs/lab-misp-intel/lab-instructions.md) — Triển khai cụm threat sharing MISP mock phục vụ quản lý chỉ số độc hại IOCs và tự động sinh Suricata API Blocklist.
-*   **service-mesh-zero-trust**: [`lab-istio-mtls`](./08-security-operations/03-service-mesh-zero-trust/labs/lab-istio-mtls/lab-instructions.md) — Cấu hình Istio Service Mesh, kích hoạt mTLS bắt buộc để bảo vệ traffic nội bộ Zero-trust.
+| Nhóm Chủ Đề | 🟢 Cấp độ: EASY (Nhập môn) | 🟡 Cấp độ: MEDIUM (Thực chiến) | 🔴 Cấp độ: HARD (Production/Expert) |
+| :--- | :--- | :--- | :--- |
+| **1. Git Security & Secrets** <br> (Module 1) | [Lab 1.3: Quy Trình Git Flow An Toàn](./01-fundamentals/03-git-workflow/labs/lab-git-flow/lab-instructions.md) | [Lab 1.4: Chặn Rò Rỉ Gitleaks Local](./01-fundamentals/03-git-workflow/labs/lab-gitleaks-local/lab-instructions.md) | [Lab 1.5: Gitleaks Action Pipeline](./01-fundamentals/03-git-workflow/labs/lab-gitleaks-pipeline/lab-instructions.md) |
+| **2. Container & Hardening** <br> (Module 2) | [Lab 2.1: Dockerize Web App Node.js](./02-containerization/01-docker-basics/labs/lab-dockerize-ai-app/lab-instructions.md) | [Lab 2.2: Multi-stage & Hardening CIS](./02-containerization/01-docker-basics/labs/lab-docker-hardening/lab-instructions.md) | [Lab 2.3: Resource Limits & Isolation](./02-containerization/01-docker-basics/labs/lab-docker-compose-production/lab-instructions.md) |
+| **3. CI/CD Pipeline Security** <br> (Module 3) | [Lab 3.1: GitHub Actions CI Pipeline](./03-cicd-automation/01-github-actions/labs/lab-github-actions-runner/lab-instructions.md) (Self-hosted) | [Lab 3.2: Tích hợp SAST & SCA Pipeline](./07-devsecops-pipeline/01-security-scanning/labs/lab-pipeline-security/lab-instructions.md) (Trivy) | [Lab 3.3: Jenkins SAST SonarQube](./03-cicd-automation/02-jenkins-gitlab-ci/labs/lab-jenkins-sast/lab-instructions.md) |
+| **4. Infrastructure as Code** <br> (Module 4) | [Lab 4.1: Terraform & State Local](./04-infrastructure-as-code/01-terraform/labs/lab-terraform-local/lab-instructions.md) | [Lab 4.2: Quét Lỗ Hổng IaC Tfsec](./04-infrastructure-as-code/01-terraform/labs/lab-terraform-scan/lab-instructions.md) | [Lab 4.3: Pipeline IaC tfsec Action](./04-infrastructure-as-code/01-terraform/labs/lab-terraform-pipeline/lab-instructions.md) |
+| **5. Kubernetes & Hardening** <br> (Module 5) | [Lab 5.1: Deploy Webapp Helm Chart](./05-kubernetes/01-k8s-basics/labs/lab-helm-deploy-webapp/lab-instructions.md) | [Lab 5.2: NetworkPolicies & RBAC K8s](./05-kubernetes/03-k8s-security/labs/lab-hardening-ai-microservice/lab-instructions.md) | [Lab 5.3: Falco Runtime & Kube-bench](./08-security-operations/01-incident-response/labs/lab-incident-response/lab-instructions.md) |
+| **6. Observability & Chaos** <br> (Module 6) | [Lab 6.1: Prometheus Grafana Monitor](./06-observability/01-prometheus-grafana/labs/lab-prometheus-grafana/lab-instructions.md) | [Lab 6.2: Grafana Loki & Alerting](./06-observability/02-elk-loki-logging/labs/lab-elk-loki/lab-instructions.md) | [Lab 6.3: Chaos Engineering Alert Test](./06-observability/01-prometheus-grafana/labs/lab-prometheus-grafana/lab-instructions.md) |
+| **7. Secrets & Compliance** <br> (Module 7) | [Lab 7.1: HashiCorp Vault DEV Setup](./07-devsecops-pipeline/02-secret-management/labs/lab-vault-secrets/lab-instructions.md) | [Lab 7.2: OPA Conftest Policy Code](./07-devsecops-pipeline/03-compliance-as-code/labs/lab-opa-conftest/lab-instructions.md) | [Lab 7.3: Dynamic Secrets & Cosign Sign](./07-devsecops-pipeline/01-security-scanning/labs/lab-pipeline-security/lab-instructions.md) |
+| **8. Zero-Trust & Intel** <br> (Module 8) | [Lab 8.1: Istio Service Mesh & Kiali](./08-security-operations/03-service-mesh-zero-trust/labs/lab-istio-mtls/lab-instructions.md) | [Lab 8.2: MISP Threat Intel Cục Bộ](./08-security-operations/02-threat-intelligence/labs/lab-misp-intel/lab-instructions.md) | [Lab 8.3: mTLS STRICT & Auth Policy](./08-security-operations/03-service-mesh-zero-trust/labs/lab-istio-mtls/lab-instructions.md) |
 
 ---
 

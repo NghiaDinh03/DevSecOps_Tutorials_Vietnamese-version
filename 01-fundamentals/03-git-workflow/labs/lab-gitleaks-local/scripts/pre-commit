@@ -1,0 +1,14 @@
+#!/bin/sh
+# Chạy gitleaks quét các thay đổi trước khi commit (chỉ quét phần staged)
+echo "🔒 Đang quét an toàn dữ liệu commit bằng Gitleaks..."
+
+# Chạy gitleaks quét các thay đổi trong vùng staged
+gitleaks protect --staged --verbose
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ CẢNH BÁO: Phát hiện Secrets/API Key nhạy cảm trong code của bạn!"
+  echo "❌ Commit đã bị chặn để bảo vệ an toàn. Vui lòng gỡ bỏ Secrets trước khi commit lại."
+  echo ""
+  exit 1
+fi
